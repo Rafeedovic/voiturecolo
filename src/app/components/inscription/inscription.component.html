@@ -1,0 +1,46 @@
+<form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input matInput placeholder="Nom" formControlName="nom">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint *ngIf="inscriptionForm.controls['nom'].invalid && inscriptionForm.controls['nom'].touched">
+          Nom is required
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Prénom</mat-label>
+        <input matInput placeholder="Prénom" formControlName="prenom">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint *ngIf="inscriptionForm.controls['prenom'].invalid && inscriptionForm.controls['prenom'].touched">
+          Prénom is required
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint *ngIf="inscriptionForm.controls['email'].invalid && inscriptionForm.controls['email'].touched">
+          Email is required and must be a valid email
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint *ngIf="inscriptionForm.controls['password'].invalid && inscriptionForm.controls['password'].touched">
+          Password is required and must be at least 6 characters
+        </mat-hint>
+      </mat-form-field>
+    </p>
+    <p>
+      <button mat-raised-button color="primary" type="submit">Inscription</button>
+    </p>
+  </form>
+  

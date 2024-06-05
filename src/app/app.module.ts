@@ -1,28 +1,49 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InscriptionComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireAuthModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
+    AuthService,
     provideClientHydration(),
-    provideFirebaseApp(() => initializeApp({"projectId":"voiturecolo-dec00","appId":"1:1010105974504:web:00078d6abe71f61282935d","storageBucket":"voiturecolo-dec00.appspot.com","apiKey":"AIzaSyBlOUq67hFo0RKcdcqN5VyePZc_WWegEW4","authDomain":"voiturecolo-dec00.firebaseapp.com","messagingSenderId":"1010105974504"})),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
