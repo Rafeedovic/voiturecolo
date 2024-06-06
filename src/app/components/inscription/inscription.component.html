@@ -23,11 +23,12 @@
     <button type="submit">Inscription</button>
   </p>
   <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" style="color: green">{{ successMessage }}</p>
+  <p *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" style="color: green">Veuillez vérifier votre adresse mail</p>
 </form>
 
 <!-- Afficher les informations de l'utilisateur après l'inscription -->
 <div *ngIf="userInfo">
-  <h3>Inscription Réussie</h3>
   <p>Nom: {{ userInfo.nom }}</p>
   <p>Prénom: {{ userInfo.prenom }}</p>
   <p>Email: {{ userInfo.email }}</p>
