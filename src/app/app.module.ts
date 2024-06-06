@@ -12,11 +12,13 @@ import { InscriptionComponent } from './components/inscription/inscription.compo
 import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MatStepperModule } from '@angular/material/stepper';
+import { ConnexionComponent } from './components/connexion/connexion/connexion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
