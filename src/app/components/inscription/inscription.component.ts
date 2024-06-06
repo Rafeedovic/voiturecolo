@@ -26,9 +26,6 @@ export class InscriptionComponent {
       const { email, password, nom, prenom } = this.registerForm.value;
       try {
         const result = await this.authService.register(email, password);
-        if (result){
-          console.log("Inscription réussie");
-        }
         // Stocker les informations de l'utilisateur
         this.userInfo = {
           email: email,

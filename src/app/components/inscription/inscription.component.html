@@ -1,39 +1,29 @@
-<!-- inscription.component.html -->
-
-<mat-horizontal-stepper linear>
-  <!-- Première étape -->
-  <mat-step [stepControl]="registerForm.get('step1')">
-    <ng-template matStepLabel>Étape 1</ng-template>
-    <form [formGroup]="registerForm.get('step1')" (ngSubmit)="nextStep()">
-      <p>
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" formControlName="nom">
-        <small *ngIf="registerForm.get('step1.nom')?.touched && registerForm.get('step1.nom')?.invalid" class="error-message">Nom is required</small>
-      </p>
-      <!-- Autres champs du formulaire pour l'étape 1 -->
-      <button mat-button matStepperNext type="submit">Suivant</button>
-    </form>
-  </mat-step>
-
-  <!-- Deuxième étape -->
-  <mat-step [stepControl]="registerForm.get('step2')">
-    <ng-template matStepLabel>Étape 2</ng-template>
-    <form [formGroup]="registerForm.get('step2')" (ngSubmit)="submit()">
-      <p>
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email">
-        <small *ngIf="registerForm.get('step2.email')?.touched && registerForm.get('step2.email')?.invalid" class="error-message">Email is required and must be a valid email</small>
-      </p>
-      <!-- Autres champs du formulaire pour l'étape 2 -->
-      <button mat-button matStepperPrevious type="button">Précédent</button>
-      <button mat-button type="submit">Inscription</button>
-    </form>
-  </mat-step>
-</mat-horizontal-stepper>
-
-<!-- Affichage des erreurs globales -->
-<p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
-
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <p>
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" formControlName="nom">
+    <small *ngIf="registerForm.get('nom')?.touched && registerForm.get('nom')?.invalid">Nom is required</small>
+  </p>
+  <p>
+    <label for="prenom">Prénom</label>
+    <input type="text" id="prenom" formControlName="prenom">
+    <small *ngIf="registerForm.get('prenom')?.touched && registerForm.get('prenom')?.invalid">Prénom is required</small>
+  </p>
+  <p>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email">
+    <small *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">Email is required and must be a valid email</small>
+  </p>
+  <p>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password">
+    <small *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">Password is required and must be at least 6 characters</small>
+  </p>
+  <p>
+    <button type="submit">Inscription</button>
+  </p>
+  <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
+</form>
 
 <!-- Afficher les informations de l'utilisateur après l'inscription -->
 <div *ngIf="userInfo">
