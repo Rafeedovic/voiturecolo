@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service'; // Update the path as necessary
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-inscription',
@@ -8,10 +8,12 @@ import { AuthService } from '../../services/auth.service'; // Update the path as
   styleUrls: ['./inscription.component.css']
 })
 export class InscriptionComponent {
-  inscriptionForm: FormGroup;
+  registerForm: FormGroup;
+  errorMessage: string = '';
+  userInfo: { nom: string, prenom: string, email: string } | null = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.inscriptionForm = this.fb.group({
+    this.registerForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -19,17 +21,28 @@ export class InscriptionComponent {
     });
   }
 
-  onSubmit() {
-    console.log('Form Submitted'); // Add this line for debugging
-    if (this.inscriptionForm.valid) {
-      const { email, password } = this.inscriptionForm.value;
-      this.authService.register(email, password)
-        .then((user) => {
-          console.log('User registered:', user);
-        })
-        .catch((error) => {
-          console.error('Error during registration:', error);
-        });
+  async onSubmit() {
+    if (this.registerForm.valid) {
+      const { email, password, nom, prenom } = this.registerForm.value;
+      try {
+        const result = await this.authService.register(email, password);
+        if (result){
+          console.log("Inscription réussie");
+        }
+        // Stocker les informations de l'utilisateur
+        this.userInfo = {
+          email: email,
+          nom: nom,
+          prenom: prenom
+        };
+        this.errorMessage = '';
+      } catch (error) {
+        if (error instanceof Error) {
+          this.errorMessage = error.message;
+        } else {
+          this.errorMessage = "An unknown error occurred";
+        }
+      }
     }
   }
 }

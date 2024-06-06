@@ -1,4 +1,9 @@
 export const environment = {
     production: false,
-    firebaseConfig : {"projectId":"voiturecolo-dec00","appId":"1:1010105974504:web:00078d6abe71f61282935d","storageBucket":"voiturecolo-dec00.appspot.com","apiKey":"AIzaSyBlOUq67hFo0RKcdcqN5VyePZc_WWegEW4","authDomain":"voiturecolo-dec00.firebaseapp.com","messagingSenderId":"1010105974504"}
+    firebaseConfig : {apiKey: "AIzaSyDf8MKQ1cSbbh2Rjc1ZP6ydZAZCKbyi1C0",
+    authDomain: "voiturecolo.firebaseapp.com",
+    projectId: "voiturecolo",
+    storageBucket: "voiturecolo.appspot.com",
+    messagingSenderId: "440987894490",
+    appId: "1:440987894490:web:77aaa0699022fb791d9be3"}
 };
