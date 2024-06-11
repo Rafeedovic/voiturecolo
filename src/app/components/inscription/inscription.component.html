@@ -24,7 +24,7 @@
   </p>
   <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
   <p *ngIf="successMessage" style="color: green">{{ successMessage }}</p>
-  <p *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" style="color: green">Veuillez vérifier votre adresse mail</p>
+  <p *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" style="color: green">Veuillez vérifier votre adresse mail pour valider votre inscription</p>
 </form>
 
 <!-- Afficher les informations de l'utilisateur après l'inscription -->

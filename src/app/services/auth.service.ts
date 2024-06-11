@@ -44,15 +44,32 @@ export class AuthService {
     }
   }
 
+  
   async login(email: string, password: string) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       return result;
-    } catch (error) {
-      console.error("Connexion échouée", error);
-      throw error;
+    } catch (error:any) {
+      // Ajout de plus de détails sur l'erreur
+      console.error("Erreur de connexion", error);
+  
+      // Gestion des erreurs Firebase spécifiques
+      // switch (error.code) {
+      //   case 'auth/invalid-email':
+      //     throw new Error('L\'adresse e-mail est invalide.');
+      //   case 'auth/user-disabled':
+      //     throw new Error('L\'utilisateur correspondant à cette adresse e-mail a été désactivé.');
+      //   case 'auth/user-not-found':
+      //     throw new Error('Aucun utilisateur correspondant à cette adresse e-mail.');
+      //   case 'auth/wrong-password':
+      //     throw new Error('Le mot de passe est incorrect.');
+      //   default:
+      //     throw new Error('Une erreur s\'est produite lors de la connexion.');
+      // }
+      throw error.code;
     }
   }
+  
 
   async logout() {
     await this.afAuth.signOut();

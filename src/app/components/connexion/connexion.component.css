@@ -5,3 +5,8 @@
 .mat-mdc-form-field {
   margin-top: 16px;
 }
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+  }
