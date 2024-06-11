@@ -1,18 +1,21 @@
 // src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
-
 import { AppComponent } from './app.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { AuthService } from './services/auth.service';
 import { AppRoutingModule } from './app-routing.module';
-import { MatStepperModule } from '@angular/material/stepper';
 import { ConnexionComponent } from './components/connexion/connexion/connexion.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -27,9 +30,13 @@ import { ConnexionComponent } from './components/connexion/connexion/connexion.c
     AngularFireAuthModule,
     AngularFirestoreModule,
     AppRoutingModule,
-    MatStepperModule
+    MatButtonModule,
+    MatStepperModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,10 +2,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InscriptionComponent } from './components/inscription/inscription.component';
+import { ConnexionComponent } from './components/connexion/connexion/connexion.component';
 
 const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
-  { path: '', redirectTo: '/inscription', pathMatch: 'full' }
+  { path: 'connexion', component: ConnexionComponent },
+  //{ path: '', redirectTo: '/inscription', pathMatch: 'full' }
 ];
 
 @NgModule({
