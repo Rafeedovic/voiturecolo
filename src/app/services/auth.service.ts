@@ -6,8 +6,14 @@ import firebase from 'firebase/compat/app';
   providedIn: 'root'
 })
 export class AuthService {
+  private currentUser: firebase.User | null = null;
 
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(private afAuth: AngularFireAuth) {
+    // Initialisez currentUser en écoutant les changements de l'état d'authentification
+    this.afAuth.authState.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   private async waitForEmailVerification(user: firebase.User): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -44,38 +50,23 @@ export class AuthService {
     }
   }
 
-  
   async login(email: string, password: string) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      return result;
-    } catch (error:any) {
-      // Ajout de plus de détails sur l'erreur
+      this.currentUser = result.user; // Stocke l'utilisateur connecté
+      return result.user;
+    } catch (error: any) {
       console.error("Erreur de connexion", error);
-  
-      // Gestion des erreurs Firebase spécifiques
-      // switch (error.code) {
-      //   case 'auth/invalid-email':
-      //     throw new Error('L\'adresse e-mail est invalide.');
-      //   case 'auth/user-disabled':
-      //     throw new Error('L\'utilisateur correspondant à cette adresse e-mail a été désactivé.');
-      //   case 'auth/user-not-found':
-      //     throw new Error('Aucun utilisateur correspondant à cette adresse e-mail.');
-      //   case 'auth/wrong-password':
-      //     throw new Error('Le mot de passe est incorrect.');
-      //   default:
-      //     throw new Error('Une erreur s\'est produite lors de la connexion.');
-      // }
       throw error.code;
     }
   }
   
-
   async logout() {
     await this.afAuth.signOut();
+    this.currentUser = null; // Réinitialiser l'utilisateur après déconnexion
   }
 
   getUser() {
-    return this.afAuth.authState;
+    return this.currentUser ? this.currentUser : null;
   }
 }
