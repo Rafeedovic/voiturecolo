@@ -22,6 +22,7 @@ import { AccueilComponent } from './components/accueil/accueil.component';
 import { FaqComponent } from './components/faq/faq.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTabsModule,
     MatExpansionModule,
     HttpClientModule,
+    MatTableModule,
   ],
   providers: [AuthService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
