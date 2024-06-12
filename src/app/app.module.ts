@@ -17,13 +17,20 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import { HomeComponent } from './components/home/home.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AccueilComponent } from './components/accueil/accueil.component';
+import { FaqComponent } from './components/faq/faq.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     InscriptionComponent,
     ConnexionComponent,
-    HomeComponent
+    HomeComponent,
+    AccueilComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +44,12 @@ import { HomeComponent } from './components/home/home.component';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
+    MatExpansionModule,
+    HttpClientModule,
   ],
   providers: [AuthService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

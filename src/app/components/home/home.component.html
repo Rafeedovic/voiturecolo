@@ -1,9 +1,40 @@
-<div>
-    <h1>Bienvenue {{ email }}</h1>
-    <p>Ceci est le contenu de la page d'accueil.</p>
-</div>
-
-<form (ngSubmit)="logout()">
-    <button type="submit">Déconnexion</button>
-</form>
-
+<mat-tab-group>
+    <mat-tab label="Accueil"> 
+      <div>
+        <h1>Bienvenue {{ email }}</h1>
+        <p>Ceci est le contenu de la page d'accueil.</p>
+      </div> 
+  
+      <form *ngIf="email" (ngSubmit)="logout()">
+        <button type="submit">Déconnexion</button>
+      </form>
+  
+      <div>
+        <input [(ngModel)]="searchQuery" placeholder="Rechercher une voiture" />
+        <button (click)="searchVoitures()">Rechercher</button>
+      </div>
+  
+      <div *ngIf="voitures.length > 0">
+        <h2>Résultats de la recherche :</h2>
+        <ul>
+          <li *ngFor="let voiture of voitures">
+            <strong>{{ voiture.marque }} - {{ voiture.modele_dossier }}</strong><br>
+            {{ voiture.designation_commerciale }}<br>
+            Carburant: {{ voiture.carburant }}<br>
+            Puissance: {{ voiture.puissance_maximale }} ch<br>
+            Boîte de vitesse: {{ voiture.boite_de_vitesse }}<br>
+            Consommation mixte: {{ voiture.consommation_mixte_l_100km }} L/100km<br>
+            Émissions de CO2: {{ voiture.co2_g_km }} g/km<br>
+            Année: {{ voiture.annee }}<br>
+            Carrosserie: {{ voiture.carrosserie }}<br>
+            Gamme: {{ voiture.gamme }}
+          </li>
+        </ul>
+      </div>
+    </mat-tab>
+  
+    <mat-tab label="Connexion"> <app-connexion></app-connexion> </mat-tab>
+    <mat-tab label="Inscription"> <app-inscription></app-inscription> </mat-tab>
+    <mat-tab label="FAQ"> <app-faq></app-faq> </mat-tab>
+  </mat-tab-group>
+  
