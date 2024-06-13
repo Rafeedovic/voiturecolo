@@ -5,14 +5,13 @@ import { AuthService } from '../../services/auth.service';
 import { VoitureService } from '../../services/voiture.service';
 import { MatTableDataSource } from '@angular/material/table';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  selector: 'app-listevoitures',
+  templateUrl: './listevoitures.component.html',
+  styleUrl: './listevoitures.component.css'
 })
 
-export class HomeComponent {
+export class ListevoituresComponent {
   email : any  | null = '';
   searchQuery: string = '';
   voitures: any[] = [];
@@ -27,7 +26,8 @@ export class HomeComponent {
   ngOnInit() {
     if (this.authService.getUser()){
       this.email = this.authService.getUser()?.email;
-    }
+    };
+    this.getVoitures();
   }
 
   async logout(){
@@ -37,28 +37,16 @@ export class HomeComponent {
     this.email = '';
   }
 
-  searchVoitures() {
-    if (this.searchQuery.trim()) {
-      this.voitureService.searchVoitures(this.searchQuery).subscribe(
+  getVoitures() {
+    if (true) {
+      this.voitureService.getVoitures().subscribe(
         data => {
-          console.log(data.results);
-          //this.voitures = data.records.results.map((record: any) => record.fields);
           this.voitures = data.results;
-          this.firstVoiture = this.voitures[0]; // Récupérer la première voiture
-          console.log(this.firstVoiture);
         },
         error => {
           console.error('Erreur lors de la recherche de voitures:', error);
         }
       );
-    }
-  }
-
-  filterByMarque(): void {
-    if (this.selectedMarque) {
-      this.voitures = this.voitures.filter(voiture => voiture.marque === this.selectedMarque);
-    } else {
-      this.voitures = this.voitures;
     }
   }
 }

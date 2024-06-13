@@ -1,5 +1,5 @@
 // src/app/app.module.ts
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -23,6 +23,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
+import { ListevoituresComponent } from './components/listevoitures/listevoitures.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatTableModule} from '@angular/material/table';
     ConnexionComponent,
     HomeComponent,
     AccueilComponent,
-    FaqComponent
+    FaqComponent,
+    ListevoituresComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import {MatTableModule} from '@angular/material/table';
     MatTableModule,
   ],
   providers: [AuthService, provideAnimationsAsync()],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }
 
