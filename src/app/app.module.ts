@@ -1,28 +1,60 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+// src/app/app.module.ts
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { AuthService } from './services/auth.service';
+import { AppRoutingModule } from './app-routing.module';
+import { ConnexionComponent } from './components/connexion/connexion.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import { HomeComponent } from './components/home/home.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AccueilComponent } from './components/accueil/accueil.component';
+import { FaqComponent } from './components/faq/faq.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import { ListevoituresComponent } from './components/listevoitures/listevoitures.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InscriptionComponent,
+    ConnexionComponent,
+    HomeComponent,
+    AccueilComponent,
+    FaqComponent,
+    ListevoituresComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AppRoutingModule,
+    MatButtonModule,
+    MatStepperModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTabsModule,
+    MatExpansionModule,
+    HttpClientModule,
+    MatTableModule,
   ],
-  providers: [
-    provideClientHydration(),
-    provideFirebaseApp(() => initializeApp({"projectId":"voiturecolo-dec00","appId":"1:1010105974504:web:00078d6abe71f61282935d","storageBucket":"voiturecolo-dec00.appspot.com","apiKey":"AIzaSyBlOUq67hFo0RKcdcqN5VyePZc_WWegEW4","authDomain":"voiturecolo-dec00.firebaseapp.com","messagingSenderId":"1010105974504"})),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
-  ],
-  bootstrap: [AppComponent]
+  providers: [AuthService, provideAnimationsAsync()],
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }
+

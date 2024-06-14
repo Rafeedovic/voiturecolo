@@ -1,0 +1,51 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
+
+@Component({
+  selector: 'app-connexion',
+  templateUrl: './connexion.component.html',
+  styleUrl: './connexion.component.css',
+})
+export class ConnexionComponent {
+  submitted: boolean = false;
+  loginForm: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
+  userInfo: { email: string, password: string } | null = null;
+
+  constructor(private _formBuilder: FormBuilder, private authService: AuthService) {
+    this.loginForm = this._formBuilder.group({
+      email: ['', Validators.required,Validators.email],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  async onSubmitlogin() {
+    this.submitted = true;
+    console.log(this.loginForm);
+    if (true) {
+      const {email, password} = this.loginForm.value;
+      try {
+        console.log(email, password);
+        // Inscription de l'utilisateur
+        await this.authService.login(email, password);
+        // Stocker les informations de l'utilisateur
+        this.userInfo = {
+          email: email,
+          password: password
+        };
+        this.errorMessage = ''; // Réinitialiser le message d'erreur
+        this.successMessage = 'Votre connexion est bien validée '; // Afficher le message de succès
+      } catch (error) {
+        if (error instanceof Error) {
+          this.errorMessage = error.message;
+        } else {
+          this.errorMessage = "Une erreur inconnue s'est produite.";
+        }
+        this.successMessage = ''; // Réinitialiser le message de succès
+      }
+    }
+  }
+}
