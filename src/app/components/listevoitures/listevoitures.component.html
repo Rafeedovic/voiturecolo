@@ -1,61 +1,73 @@
 <h2>Notre catalogue de voitures :</h2>
-    <table mat-table [dataSource]="voitures" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="marque">
-        <th mat-header-cell *matHeaderCellDef> Marque </th>
-        <td mat-cell *matCellDef="let element"> {{element.marque}} </td>
-        </ng-container>
+<!-- <div>
+  <mat-form-field>
+    <mat-label>Filtrer par marque</mat-label>
+    <mat-select [(ngModel)]="selectedMarque" (selectionChange)="filterByMarque()">
+      <mat-option value="">Toutes les marques</mat-option>
+      <mat-option *ngFor="let marque of marques" [value]="marque">
+        {{ marque }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div> -->
 
-        <ng-container matColumnDef="modele_dossier">
-        <th mat-header-cell *matHeaderCellDef> Modèle </th>
-        <td mat-cell *matCellDef="let element"> {{element.modele_dossier}} </td>
-        </ng-container>
+<table mat-table [dataSource]="voitures" class="mat-elevation-z8">
+  <ng-container matColumnDef="marque">
+    <th mat-header-cell *matHeaderCellDef> Marque </th>
+    <td mat-cell *matCellDef="let element"> {{element.marque}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="designation_commerciale">
-        <th mat-header-cell *matHeaderCellDef> Désignation </th>
-        <td mat-cell *matCellDef="let element"> {{element.designation_commerciale}} </td>
-        </ng-container>
+  <ng-container matColumnDef="modele_dossier">
+    <th mat-header-cell *matHeaderCellDef> Modèle </th>
+    <td mat-cell *matCellDef="let element"> {{element.modele_dossier}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="carburant">
-        <th mat-header-cell *matHeaderCellDef> Carburant </th>
-        <td mat-cell *matCellDef="let element"> {{element.carburant}} </td>
-        </ng-container>
+  <ng-container matColumnDef="designation_commerciale">
+    <th mat-header-cell *matHeaderCellDef> Désignation </th>
+    <td mat-cell *matCellDef="let element"> {{element.designation_commerciale}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="puissance_maximale">
-        <th mat-header-cell *matHeaderCellDef> Puissance (ch) </th>
-        <td mat-cell *matCellDef="let element"> {{element.puissance_maximale}} </td>
-        </ng-container>
+  <ng-container matColumnDef="carburant">
+    <th mat-header-cell *matHeaderCellDef> Carburant </th>
+    <td mat-cell *matCellDef="let element"> {{element.carburant}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="boite_de_vitesse">
-        <th mat-header-cell *matHeaderCellDef> Boîte de vitesse </th>
-        <td mat-cell *matCellDef="let element"> {{element.boite_de_vitesse}} </td>
-        </ng-container>
+  <ng-container matColumnDef="puissance_maximale">
+    <th mat-header-cell *matHeaderCellDef> Puissance (ch) </th>
+    <td mat-cell *matCellDef="let element"> {{element.puissance_maximale}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="consommation_mixte_l_100km">
-        <th mat-header-cell *matHeaderCellDef> Consommation mixte (L/100km) </th>
-        <td mat-cell *matCellDef="let element"> {{element.consommation_mixte_l_100km}} </td>
-        </ng-container>
+  <ng-container matColumnDef="boite_de_vitesse">
+    <th mat-header-cell *matHeaderCellDef> Boîte de vitesse </th>
+    <td mat-cell *matCellDef="let element"> {{element.boite_de_vitesse}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="co2_g_km">
-        <th mat-header-cell *matHeaderCellDef> CO2 (g/km) </th>
-        <td mat-cell *matCellDef="let element"> {{element.co2_g_km}} </td>
-        </ng-container>
+  <ng-container matColumnDef="consommation_mixte_l_100km">
+    <th mat-header-cell *matHeaderCellDef> Consommation mixte (L/100km) </th>
+    <td mat-cell *matCellDef="let element"> {{element.consommation_mixte_l_100km}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="annee">
-        <th mat-header-cell *matHeaderCellDef> Année </th>
-        <td mat-cell *matCellDef="let element"> {{element.annee}} </td>
-        </ng-container>
+  <ng-container matColumnDef="co2_g_km">
+    <th mat-header-cell *matHeaderCellDef> CO2 (g/km) </th>
+    <td mat-cell *matCellDef="let element"> {{element.co2_g_km}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="carrosserie">
-        <th mat-header-cell *matHeaderCellDef> Carrosserie </th>
-        <td mat-cell *matCellDef="let element"> {{element.carrosserie}} </td>
-        </ng-container>
+  <ng-container matColumnDef="annee">
+    <th mat-header-cell *matHeaderCellDef> Année </th>
+    <td mat-cell *matCellDef="let element"> {{element.annee}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="gamme">
-        <th mat-header-cell *matHeaderCellDef> Gamme </th>
-        <td mat-cell *matCellDef="let element"> {{element.gamme}} </td>
-        </ng-container>
+  <ng-container matColumnDef="carrosserie">
+    <th mat-header-cell *matHeaderCellDef> Carrosserie </th>
+    <td mat-cell *matCellDef="let element"> {{element.carrosserie}} </td>
+  </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+  <ng-container matColumnDef="gamme">
+    <th mat-header-cell *matHeaderCellDef> Gamme </th>
+    <td mat-cell *matCellDef="let element"> {{element.gamme}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
