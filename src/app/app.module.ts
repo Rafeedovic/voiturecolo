@@ -24,6 +24,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { ListevoituresComponent } from './components/listevoitures/listevoitures.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ListevoituresComponent } from './components/listevoitures/listevoitures
     MatExpansionModule,
     HttpClientModule,
     MatTableModule,
+    MatSelectModule,
   ],
   providers: [AuthService, provideAnimationsAsync()],
   bootstrap: [AppComponent],

@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'; // Importez map depuis 'rxjs/operators'
+import { Voiture } from '../components/listevoitures/voiture';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class VoitureService {
   private limit_results :string = `100`;
   private apiUrl = 'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/vehicules-commercialises/records?limit='+this.limit_results;
@@ -16,8 +19,37 @@ export class VoitureService {
     return this.http.get<any>(url);
   }
 
-  getVoitures(): Observable<any> {
+  getVoitures(): Observable<Voiture[]> {
     const url = `${this.apiUrl}`;
-    return this.http.get<any>(url);
+    return this.http.get<{ results: Voiture[] }>(url)
+               .pipe(map(response => response.results)); // Extract results field
+  }
+
+  getMarques(): Observable<string[]> {
+    return this.getVoitures().pipe(
+      map((voitures:any[]) => {
+        const marquesSet = new Set<string>(); // Utiliser un Set pour éviter les doublons
+
+        voitures.forEach((voiture:any) => {
+          marquesSet.add(voiture.marque); // Ajouter chaque marque dans le Set
+        });
+
+        return Array.from(marquesSet); // Convertir le Set en tableau
+      })
+    );
+  }
+
+  getCarburant(): Observable<string[]> {
+    return this.getCarburant().pipe(
+      map((voitures:any[]) => {
+        const carburantsSet = new Set<string>(); // Utiliser un Set pour éviter les doublons
+
+        voitures.forEach((voiture:any) => {
+          carburantsSet.add(voiture.carburant); // Ajouter chaque marque dans le Set
+        });
+
+        return Array.from(carburantsSet); // Convertir le Set en tableau
+      })
+    );
   }
 }

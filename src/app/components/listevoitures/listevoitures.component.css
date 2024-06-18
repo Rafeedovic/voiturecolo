@@ -1,0 +1,62 @@
+/* Global styles for body */
+body {
+background-color: #f0f0f0; /* Light grey background */
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+/* Container for the table */
+.table-container {
+width: 99%;
+margin: 0 auto; /* Center the container */
+padding: 20px;
+background-color: #ffffff; /* White background */
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom table styles */
+.custom-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0 10px; /* Add spacing between rows */
+}
+
+/* Header row */
+.custom-table th {
+background-color: #4CAF50; /* Green background for headers */
+color: white;
+font-weight: bold;
+padding: 10px;
+text-align: left;
+}
+
+/* Data rows */
+.custom-table td {
+padding: 10px;
+border-bottom: 1px solid #ddd; /* Add a light border to the bottom of each cell */
+}
+
+/* Form field container */
+.mat-form-field {
+width: 100%;
+margin-bottom: 20px;
+}
+
+/* Mat select styles */
+.mat-select {
+width: 100%;
+}
+
+/* Center table container */
+.table-container {
+max-width: 1200px;
+margin: 20px auto;
+padding: 20px;
+background-color: white;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

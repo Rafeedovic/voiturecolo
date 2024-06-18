@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registration-form">
   <p>
     <label for="nom">Nom</label>
     <input type="text" id="nom" formControlName="nom">
@@ -20,15 +20,15 @@
     <small *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">Password is required and must be at least 6 characters</small>
   </p>
   <p>
-    <button type="submit">Inscription</button>
+    <button type="submit" class="btn">Inscription</button>
   </p>
-  <p *ngIf="errorMessage" style="color: red">{{ errorMessage }}</p>
-  <p *ngIf="successMessage" style="color: green">{{ successMessage }}</p>
-  <p *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" style="color: green">Veuillez vérifier votre adresse mail pour valider votre inscription</p>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+  <p *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" class="success-message">Veuillez vérifier votre adresse mail pour valider votre inscription</p>
 </form>
 
 <!-- Afficher les informations de l'utilisateur après l'inscription -->
-<div *ngIf="userInfo">
+<div *ngIf="userInfo" class="user-info">
   <p>Nom: {{ userInfo.nom }}</p>
   <p>Prénom: {{ userInfo.prenom }}</p>
   <p>Email: {{ userInfo.email }}</p>

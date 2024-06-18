@@ -11,9 +11,12 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListevoituresComponent implements OnInit {
   searchQuery: string = '';
+  voitures_backup: any[] = [];
   voitures: any[] = [];
   selectedMarque: string = '';
   marques: string[] = [];
+  carburants: string[] = [];
+  selectedCarburant: string = '';
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['marque', 'modele_dossier', 'designation_commerciale', 'carburant', 'puissance_maximale', 'boite_de_vitesse', 'consommation_mixte_l_100km', 'co2_g_km', 'annee', 'carrosserie', 'gamme'];
 
@@ -25,21 +28,49 @@ export class ListevoituresComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getVoitures();
+    //this.getVoitures();
+    this.fetchMarques(); // Appel de la méthode pour récupérer les marques disponibles
+    this.fetchVoitures(); // Appel de la méthode pour récupérer les voitures
   }
 
-  getVoitures() {
-    this.voitureService.getVoitures().subscribe(
-      data => {
-        this.voitures = data.results;
-        // this.marques = [...new Set(this.voitures.map(voiture => voiture.marque))];
-        // this.filterByMarque();
-      },
-      error => {
-        console.error('Erreur lors de la recherche de voitures:', error);
-      }
-    );
+  fetchVoitures(): void {
+    this.voitureService.getVoitures().subscribe((data) => {
+      this.voitures = data; // Assign data.results to this.voitures
+      this.voitures_backup = this.voitures;
+    });
   }
+
+  fetchMarques(): void {
+    this.voitureService.getMarques().subscribe((data: string[]) => {
+      this.marques = data; // Mettre à jour le tableau de marques avec les données récupérées de l'API
+      console.log(this.marques);
+    });
+  }
+
+  fetchCarburant(): void {
+    this.voitureService.getCarburant().subscribe((data: string[]) => {
+      this.carburants = data; // Mettre à jour le tableau de marques avec les données récupérées de l'API
+      console.log(this.carburants);
+    });
+  }
+
+  applyFilter(): void {
+    // Créer une copie des voitures pour éviter de modifier directement this.voitures
+    let filteredVoitures = [...this.voitures];
+  
+    // Appliquer le filtre par marque si une marque est sélectionnée
+    if (this.selectedMarque) {
+      filteredVoitures = this.voitures_backup.filter(voiture => voiture.marque === this.selectedMarque);
+    }
+
+    if (this.selectedCarburant) {
+      filteredVoitures = this.voitures_backup.filter(voiture => voiture.carburant === this.selectedCarburant);
+    }
+  
+    // Mettre à jour this.voitures avec les voitures filtrées
+    this.voitures = filteredVoitures;
+  }
+  
 
   // filterByMarque() {
   //   if (this.selectedMarque) {
