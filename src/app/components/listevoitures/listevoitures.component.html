@@ -5,7 +5,7 @@
   <mat-form-field>
     <mat-label>Filtrer par marque</mat-label>
     <mat-select [(value)]="selectedMarque" (selectionChange)="applyFilter()">
-      <mat-option value="">Toutes les marques</mat-option>
+      <mat-option value="Toutes les marques">Toutes les marques</mat-option>
       <mat-option *ngFor="let marque of marques" [value]="marque">
         {{ marque }}
       </mat-option>
@@ -16,7 +16,7 @@
 <!-- Filtre par carburant -->
 <div class="filter-container">
   <mat-form-field>
-    <mat-label>Filtrer par marque</mat-label>
+    <mat-label>Filtrer par carburant</mat-label>
     <mat-select [(value)]="selectedCarburant" (selectionChange)="applyFilter()">
       <mat-option value="">Tous les carburants</mat-option>
       <mat-option *ngFor="let carburant of carburants" [value]="carburant">

@@ -31,6 +31,7 @@ export class ListevoituresComponent implements OnInit {
     //this.getVoitures();
     this.fetchMarques(); // Appel de la méthode pour récupérer les marques disponibles
     this.fetchVoitures(); // Appel de la méthode pour récupérer les voitures
+    this.fetchCarburants();
   }
 
   fetchVoitures(): void {
@@ -47,7 +48,7 @@ export class ListevoituresComponent implements OnInit {
     });
   }
 
-  fetchCarburant(): void {
+  fetchCarburants(): void {
     this.voitureService.getCarburant().subscribe((data: string[]) => {
       this.carburants = data; // Mettre à jour le tableau de marques avec les données récupérées de l'API
       console.log(this.carburants);
@@ -57,14 +58,24 @@ export class ListevoituresComponent implements OnInit {
   applyFilter(): void {
     // Créer une copie des voitures pour éviter de modifier directement this.voitures
     let filteredVoitures = [...this.voitures];
+    let filteredVoitures_par_marque = [...this.voitures];
   
     // Appliquer le filtre par marque si une marque est sélectionnée
     if (this.selectedMarque) {
-      filteredVoitures = this.voitures_backup.filter(voiture => voiture.marque === this.selectedMarque);
+      if (((this.selectedMarque)=='Toutes les marques')){
+        this.voitureService.getVoitures().subscribe((data) => {
+          this.voitures = data; // Assign data.results to this.voitures
+        });
+        console.log(this.selectedMarque);
+      }
+      else{
+        filteredVoitures = this.voitures_backup.filter(voiture => voiture.marque === this.selectedMarque);
+        filteredVoitures_par_marque = filteredVoitures;}
     }
-
+    
+    //filtre carburant
     if (this.selectedCarburant) {
-      filteredVoitures = this.voitures_backup.filter(voiture => voiture.carburant === this.selectedCarburant);
+      filteredVoitures = filteredVoitures_par_marque.filter(voiture => voiture.carburant === this.selectedCarburant);
     }
   
     // Mettre à jour this.voitures avec les voitures filtrées

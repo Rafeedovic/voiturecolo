@@ -40,7 +40,7 @@ export class VoitureService {
   }
 
   getCarburant(): Observable<string[]> {
-    return this.getCarburant().pipe(
+    return this.getVoitures().pipe(
       map((voitures:any[]) => {
         const carburantsSet = new Set<string>(); // Utiliser un Set pour éviter les doublons
 
