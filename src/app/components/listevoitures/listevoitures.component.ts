@@ -3,12 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { VoitureService } from '../../services/voiture.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 @Component({
   selector: 'app-listevoitures',
   templateUrl: './listevoitures.component.html',
   styleUrls: ['./listevoitures.component.css']
 })
+
+
 export class ListevoituresComponent implements OnInit {
   searchQuery: string = '';
   voitures_backup: any[] = [];
@@ -96,5 +100,35 @@ export class ListevoituresComponent implements OnInit {
 
     this.voitures = filteredVoitures;
     this.updateOptions();
+  }
+
+  onMarqueChange(): void {
+    this.selectedCarburant = 'Tous les carburants';
+    this.selectedAnnee = 'Toutes les années';
+    this.selectedCarrosserie = 'Toutes les carrosseries';
+    this.selectedGamme = 'Toutes les gammes';
+    this.applyFilter();
+  }
+
+  onCarburantChange(): void {
+    this.selectedAnnee = 'Toutes les années';
+    this.selectedCarrosserie = 'Toutes les carrosseries';
+    this.selectedGamme = 'Toutes les gammes';
+    this.applyFilter();
+  }
+
+  onAnneeChange(): void {
+    this.selectedCarrosserie = 'Toutes les carrosseries';
+    this.selectedGamme = 'Toutes les gammes';
+    this.applyFilter();
+  }
+
+  onCarrosserieChange(): void {
+    this.selectedGamme = 'Toutes les gammes';
+    this.applyFilter();
+  }
+
+  onGammeChange(): void {
+    this.applyFilter();
   }
 }

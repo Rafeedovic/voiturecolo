@@ -1,8 +1,9 @@
 <h2>Notre catalogue de voitures :</h2>
+
 <div class="filter-container">
   <mat-form-field>
     <mat-label>Filtrer par marque</mat-label>
-    <mat-select [(value)]="selectedMarque" (selectionChange)="applyFilter()">
+    <mat-select [(value)]="selectedMarque" (selectionChange)="onMarqueChange()">
       <mat-option *ngFor="let marque of marques" [value]="marque">
         {{ marque }}
       </mat-option>
@@ -11,7 +12,7 @@
 
   <mat-form-field>
     <mat-label>Filtrer par carburant</mat-label>
-    <mat-select [(value)]="selectedCarburant" (selectionChange)="applyFilter()">
+    <mat-select [(value)]="selectedCarburant" (selectionChange)="onCarburantChange()">
       <mat-option *ngFor="let carburant of carburants" [value]="carburant">
         {{ carburant }}
       </mat-option>
@@ -20,7 +21,7 @@
 
   <mat-form-field>
     <mat-label>Filtrer par année</mat-label>
-    <mat-select [(value)]="selectedAnnee" (selectionChange)="applyFilter()">
+    <mat-select [(value)]="selectedAnnee" (selectionChange)="onAnneeChange()">
       <mat-option *ngFor="let annee of annees" [value]="annee">
         {{ annee }}
       </mat-option>
@@ -29,7 +30,7 @@
 
   <mat-form-field>
     <mat-label>Filtrer par carrosserie</mat-label>
-    <mat-select [(value)]="selectedCarrosserie" (selectionChange)="applyFilter()">
+    <mat-select [(value)]="selectedCarrosserie" (selectionChange)="onCarrosserieChange()">
       <mat-option *ngFor="let carrosserie of carrosseries" [value]="carrosserie">
         {{ carrosserie }}
       </mat-option>
@@ -38,13 +39,15 @@
 
   <mat-form-field>
     <mat-label>Filtrer par gamme</mat-label>
-    <mat-select [(value)]="selectedGamme" (selectionChange)="applyFilter()">
+    <mat-select [(value)]="selectedGamme" (selectionChange)="onGammeChange()">
       <mat-option *ngFor="let gamme of gammes" [value]="gamme">
         {{ gamme }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
+
+
 
 <div class="table-container">
 
