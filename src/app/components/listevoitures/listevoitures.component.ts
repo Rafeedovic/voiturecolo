@@ -15,8 +15,16 @@ export class ListevoituresComponent implements OnInit {
   voitures: any[] = [];
   selectedMarque: string = 'Toutes les marques';
   selectedCarburant: string = 'Tous les carburants';
+  selectedAnnee: string = 'Toutes les années';
+  selectedCarrosserie: string = 'Toutes les carrosseries';
+  selectedGamme: string = 'Toutes les gammes';
+
   marques: string[] = [];
   carburants: string[] = [];
+  annees: string[] = [];
+  carrosseries: string[] = [];
+  gammes: string[] = [];
+
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['marque', 'modele_dossier', 'designation_commerciale', 'carburant', 'puissance_maximale', 'boite_de_vitesse', 'consommation_mixte_l_100km', 'co2_g_km', 'annee', 'carrosserie', 'gamme'];
 
@@ -30,12 +38,14 @@ export class ListevoituresComponent implements OnInit {
   ngOnInit() {
     this.fetchVoitures();
     this.fetchMarques();
+    this.updateOptions();
   }
 
   fetchVoitures(): void {
     this.voitureService.getVoitures().subscribe((data) => {
       this.voitures = data;
       this.voitures_backup = [...data];
+      this.updateOptions();
     });
   }
 
@@ -45,10 +55,20 @@ export class ListevoituresComponent implements OnInit {
     });
   }
 
-  updateCarburants(): void {
+  updateOptions(): void {
     const filteredVoitures = this.selectedMarque === 'Toutes les marques' ? this.voitures_backup : this.voitures_backup.filter(voiture => voiture.marque === this.selectedMarque);
+
     const carburantsSet = new Set<string>(filteredVoitures.map(voiture => voiture.carburant));
     this.carburants = ['Tous les carburants', ...Array.from(carburantsSet)];
+
+    const anneesSet = new Set<string>(filteredVoitures.map(voiture => voiture.annee));
+    this.annees = ['Toutes les années', ...Array.from(anneesSet)];
+
+    const carrosseriesSet = new Set<string>(filteredVoitures.map(voiture => voiture.carrosserie));
+    this.carrosseries = ['Toutes les carrosseries', ...Array.from(carrosseriesSet)];
+
+    const gammesSet = new Set<string>(filteredVoitures.map(voiture => voiture.gamme));
+    this.gammes = ['Toutes les gammes', ...Array.from(gammesSet)];
   }
 
   applyFilter(): void {
@@ -62,7 +82,19 @@ export class ListevoituresComponent implements OnInit {
       filteredVoitures = filteredVoitures.filter(voiture => voiture.carburant === this.selectedCarburant);
     }
 
+    if (this.selectedAnnee !== 'Toutes les années') {
+      filteredVoitures = filteredVoitures.filter(voiture => voiture.annee === this.selectedAnnee);
+    }
+
+    if (this.selectedCarrosserie !== 'Toutes les carrosseries') {
+      filteredVoitures = filteredVoitures.filter(voiture => voiture.carrosserie === this.selectedCarrosserie);
+    }
+
+    if (this.selectedGamme !== 'Toutes les gammes') {
+      filteredVoitures = filteredVoitures.filter(voiture => voiture.gamme === this.selectedGamme);
+    }
+
     this.voitures = filteredVoitures;
-    this.updateCarburants();
+    this.updateOptions();
   }
 }

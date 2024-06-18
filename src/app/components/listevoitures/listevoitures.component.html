@@ -1,26 +1,46 @@
 <h2>Notre catalogue de voitures :</h2>
-
-<!-- Filtre par marque -->
 <div class="filter-container">
   <mat-form-field>
     <mat-label>Filtrer par marque</mat-label>
     <mat-select [(value)]="selectedMarque" (selectionChange)="applyFilter()">
-      <mat-option value=""></mat-option>
       <mat-option *ngFor="let marque of marques" [value]="marque">
         {{ marque }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-</div>
 
-<!-- Filtre par carburant -->
-<div class="filter-container">
   <mat-form-field>
     <mat-label>Filtrer par carburant</mat-label>
     <mat-select [(value)]="selectedCarburant" (selectionChange)="applyFilter()">
-      <mat-option value=""></mat-option>
       <mat-option *ngFor="let carburant of carburants" [value]="carburant">
         {{ carburant }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Filtrer par année</mat-label>
+    <mat-select [(value)]="selectedAnnee" (selectionChange)="applyFilter()">
+      <mat-option *ngFor="let annee of annees" [value]="annee">
+        {{ annee }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Filtrer par carrosserie</mat-label>
+    <mat-select [(value)]="selectedCarrosserie" (selectionChange)="applyFilter()">
+      <mat-option *ngFor="let carrosserie of carrosseries" [value]="carrosserie">
+        {{ carrosserie }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Filtrer par gamme</mat-label>
+    <mat-select [(value)]="selectedGamme" (selectionChange)="applyFilter()">
+      <mat-option *ngFor="let gamme of gammes" [value]="gamme">
+        {{ gamme }}
       </mat-option>
     </mat-select>
   </mat-form-field>
