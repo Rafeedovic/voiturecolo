@@ -26,6 +26,12 @@ import {MatTableModule} from '@angular/material/table';
 import { ListevoituresComponent } from './components/listevoitures/listevoitures.component';
 import {MatSelectModule} from '@angular/material/select';
 
+import { Component, OnInit } from '@angular/core';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CarouselCaptionComponent,CarouselComponent,CarouselControlComponent,CarouselIndicatorsComponent,CarouselInnerComponent,CarouselItemComponent,ThemeDirective} from '@coreui/angular';
+import { RouterLink } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +59,16 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatTableModule,
     MatSelectModule,
+    BrowserAnimationsModule,
+    CarouselModule,
+    ThemeDirective, 
+    CarouselComponent, 
+    CarouselIndicatorsComponent, 
+    CarouselInnerComponent, 
+    CarouselItemComponent, 
+    CarouselCaptionComponent, 
+    CarouselControlComponent, 
+    RouterLink,
   ],
   providers: [AuthService, provideAnimationsAsync()],
   bootstrap: [AppComponent],

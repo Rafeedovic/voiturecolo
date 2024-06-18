@@ -1,0 +1,80 @@
+.accueil-container {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light grey background for contrast */
+    color: #333; /* Dark text for readability */
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    color: #4CAF50; /* Green color for main headings */
+  }
+  
+  .logout-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #4CAF50; /* Green background for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .carousel-container {
+    width: 100%;
+    height: 60vh; /* Limit height to 30% of viewport height */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel-inner img {
+    width: 100%;
+    height: 60vh; /* Ensure the image takes the full height of the container */
+    object-fit: cover; /* Ensure the image covers the container without stretching */
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+  
+  .carousel-indicators {
+    position: absolute;
+    bottom: 10px; /* Position indicators 10px from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carousel-indicators button {
+    width: 15px;
+    height: 15px;
+    background-color: white; /* White background for indicators */
+    border: none;
+    border-radius: 50%; /* Circular indicators */
+    margin: 0 5px; /* Space between indicators */
+    cursor: pointer;
+  }
+  
+  .carousel-indicators button.active {
+    background-color: #4CAF50; /* Green for active indicator */
+  }
+  

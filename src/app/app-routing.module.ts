@@ -6,12 +6,14 @@ import { ConnexionComponent } from './components/connexion/connexion.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListevoituresComponent } from './components/listevoitures/listevoitures.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { AccueilComponent } from './components/accueil/accueil.component';
 
 const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
   { path: 'connexion', component: ConnexionComponent },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'faq', component: FaqComponent },
+  { path: 'accueil', component: AccueilComponent },
   { path: 'catalogue', component: ListevoituresComponent },
   //{ path: '', redirectTo: '/inscription', pathMatch: 'full' }
 ];
