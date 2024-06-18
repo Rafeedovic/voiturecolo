@@ -39,6 +39,28 @@ export class VoitureService {
     );
   }
 
+  getNombreVoituresParMarque(): Observable<{ marque: string; nombreVoitures: number }[]> {
+    return this.getVoitures().pipe(
+      map((voitures: Voiture[]) => {
+        const marqueCountMap = new Map<string, { marque: string; nombreVoitures: number }>();
+        
+        voitures.forEach(voiture => {
+          const marque = voiture.marque;
+          if (!marqueCountMap.has(marque)) {
+            marqueCountMap.set(marque, { marque: marque, nombreVoitures: 1 });
+          } else {
+            const entry = marqueCountMap.get(marque);
+            if (entry) {
+              entry.nombreVoitures++;
+            }
+          }
+        });
+        console.log(Array.from(marqueCountMap.values()))
+        return Array.from(marqueCountMap.values());
+      })
+    );
+  }
+
   getCarburant(): Observable<string[]> {
     return this.getVoitures().pipe(
       map((voitures:any[]) => {

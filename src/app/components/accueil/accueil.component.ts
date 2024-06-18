@@ -16,6 +16,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 
 export class AccueilComponent {
   email : any  | null = '';
+  showResult: boolean = false; // Variable pour contrôler l'affichage du résultat
+
 
   slides: any[] = new Array(3).fill({ id: -1, src: '', title: '', subtitle: '' });
   lastVoiture: any;
@@ -58,12 +60,19 @@ export class AccueilComponent {
   }
 
   handleLastValue(lastValue: any): void {
+    this.showResult= false;
     this.lastVoiture = lastValue;
     console.log(this.lastVoiture);  
   }
 
   displayLastVoiture(): void {
     this.showLastVoiture = true;
+    if (this.showResult!=true){
+      this.showResult = true;
+    }
+    else{
+      this.showResult = false;
+    }
     // if (this.lastVoiture) {
     //   this.fetchVoituresByGamme(this.lastVoiture.gamme);
     // }
@@ -108,6 +117,7 @@ export class AccueilComponent {
       });
   }
   filterVoitures(): void {
+    
     this.fetchVoituresByGamme(this.lastVoiture.gamme)
     //this.displayLastVoiture();
     console.log(this.choixFiltrage);

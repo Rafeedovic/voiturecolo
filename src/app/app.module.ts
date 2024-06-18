@@ -31,6 +31,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CarouselCaptionComponent,CarouselComponent,CarouselControlComponent,CarouselIndicatorsComponent,CarouselInnerComponent,CarouselItemComponent,ThemeDirective} from '@coreui/angular';
 import { RouterLink } from '@angular/router';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RouterLink } from '@angular/router';
     HomeComponent,
     AccueilComponent,
     FaqComponent,
-    ListevoituresComponent
+    ListevoituresComponent,
+    CatalogueComponent
   ],
   imports: [
     BrowserModule,
