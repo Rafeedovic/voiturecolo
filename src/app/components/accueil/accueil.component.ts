@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ConnexionComponent } from '../connexion/connexion.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+import { VoitureService } from '../../services/voiture.service';
 import { OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -18,6 +18,9 @@ export class AccueilComponent {
   email : any  | null = '';
 
   slides: any[] = new Array(3).fill({ id: -1, src: '', title: '', subtitle: '' });
+  lastVoiture: any;
+  showLastVoiture: boolean = false;
+  sameGammeVoitures: any[] = [];
 
   ngOnInit(): void {
     if (this.authService.getUser()){
@@ -44,12 +47,33 @@ export class AccueilComponent {
     };
   }
   
-  constructor(private route: ActivatedRoute,private authService: AuthService,private router: Router) {}
+  constructor(private route: ActivatedRoute,private authService: AuthService,private router: Router,private voitureService: VoitureService) {}
 
   async logout(){
     const deconnexion = await this.authService.logout();
     console.log('deconnexion');
     this.router.navigate(['accueil']);
     this.email = '';
+  }
+
+  handleLastValue(lastValue: any): void {
+    this.lastVoiture = lastValue;
+    console.log(this.lastVoiture);  
+  }
+
+  displayLastVoiture(): void {
+    this.showLastVoiture = true;
+    if (this.lastVoiture) {
+      this.fetchVoituresByGamme(this.lastVoiture.gamme);
+    }
+  }
+
+  fetchVoituresByGamme(gamme: string): void {
+    this.voitureService.getVoitures()
+      .subscribe((data) => {
+        this.sameGammeVoitures = data.filter(voiture => voiture.gamme === gamme);
+      }, (error) => {
+        console.error('Error fetching voitures', error);
+      });
   }
 }

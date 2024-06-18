@@ -22,4 +22,32 @@
     <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
   </c-carousel>
 
-<app-listevoitures></app-listevoitures>
+<app-listevoitures (lastValueEmitter)="handleLastValue($event)"></app-listevoitures>
+
+<div class="text-center mt-4">
+    <button (click)="displayLastVoiture()" class="btn btn-primary styled-button">Valider votre choix </button>
+</div>
+<p *ngIf="showLastVoiture && lastVoiture">Dernière voiture filtrée : {{ lastVoiture | json }}</p>
+
+<div *ngIf="sameGammeVoitures.length > 0" class="mt-4">
+  <h3 class="text-center">Voitures de la même gamme</h3>
+  <ul class="list-group">
+    <li *ngFor="let voiture of sameGammeVoitures; let i = index" class="list-group-item" [id]="'voiture-' + i">
+      <div class="row">
+        <div class="col-md-3"><strong>Marque:</strong> {{ voiture.marque }}</div>
+        <div class="col-md-3"><strong>Désignation commerciale:</strong> {{ voiture.designation_commerciale }}</div>
+        <div class="col-md-2"><strong>Carburant:</strong> {{ voiture.carburant }}</div>
+        <div class="col-md-2"><strong>Hybride:</strong> {{ voiture.hybride }}</div>
+        <div class="col-md-2"><strong>Boîte de vitesse:</strong> {{ voiture.boite_de_vitesse }}</div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3"><strong>Année:</strong> {{ voiture.annee }}</div>
+        <div class="col-md-3"><strong>Co2 g/km:</strong> {{ voiture.co2_g_km }}</div>
+        <div class="col-md-2"><strong>Puissance :</strong> {{ voiture.puissance_maximale }}</div>
+        <div class="col-md-2"><strong>Carrosserie:</strong> {{ voiture.carrosserie }}</div>
+        <div class="col-md-2"><strong>Conso%100 :</strong> {{ voiture.consommation_mixte_l_100km }}</div>
+        <!-- Ajoutez d'autres détails si nécessaire -->
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit,Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { VoitureService } from '../../services/voiture.service';
@@ -14,6 +14,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 
 
 export class ListevoituresComponent implements OnInit {
+  @Output() lastValueEmitter: EventEmitter<any> = new EventEmitter();
   searchQuery: string = '';
   voitures_backup: any[] = [];
   voitures: any[] = [];
@@ -31,6 +32,7 @@ export class ListevoituresComponent implements OnInit {
 
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['marque', 'modele_dossier', 'designation_commerciale', 'carburant', 'puissance_maximale', 'boite_de_vitesse', 'consommation_mixte_l_100km', 'co2_g_km', 'annee', 'carrosserie', 'gamme'];
+  filteredVoitures: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -100,6 +102,7 @@ export class ListevoituresComponent implements OnInit {
 
     this.voitures = filteredVoitures;
     this.updateOptions();
+    this.emitLastValue();
   }
 
   onMarqueChange(): void {
@@ -130,5 +133,13 @@ export class ListevoituresComponent implements OnInit {
 
   onGammeChange(): void {
     this.applyFilter();
+  }
+
+  emitLastValue() {
+    if (this.voitures.length > 0) {
+      this.lastValueEmitter.emit(this.voitures[this.voitures.length - 1]);
+    } else {
+      this.lastValueEmitter.emit(null);
+    }
   }
 }
