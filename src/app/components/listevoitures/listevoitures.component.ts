@@ -13,10 +13,10 @@ export class ListevoituresComponent implements OnInit {
   searchQuery: string = '';
   voitures_backup: any[] = [];
   voitures: any[] = [];
-  selectedMarque: string = '';
+  selectedMarque: string = 'Toutes les marques';
+  selectedCarburant: string = 'Tous les carburants';
   marques: string[] = [];
   carburants: string[] = [];
-  selectedCarburant: string = '';
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = ['marque', 'modele_dossier', 'designation_commerciale', 'carburant', 'puissance_maximale', 'boite_de_vitesse', 'consommation_mixte_l_100km', 'co2_g_km', 'annee', 'carrosserie', 'gamme'];
 
@@ -28,66 +28,41 @@ export class ListevoituresComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.getVoitures();
-    this.fetchMarques(); // Appel de la méthode pour récupérer les marques disponibles
-    this.fetchVoitures(); // Appel de la méthode pour récupérer les voitures
-    this.fetchCarburants();
+    this.fetchVoitures();
+    this.fetchMarques();
   }
 
   fetchVoitures(): void {
     this.voitureService.getVoitures().subscribe((data) => {
-      this.voitures = data; // Assign data.results to this.voitures
-      this.voitures_backup = this.voitures;
+      this.voitures = data;
+      this.voitures_backup = [...data];
     });
   }
 
   fetchMarques(): void {
     this.voitureService.getMarques().subscribe((data: string[]) => {
-      this.marques = data; // Mettre à jour le tableau de marques avec les données récupérées de l'API
-      console.log(this.marques);
+      this.marques = ['Toutes les marques', ...data];
     });
   }
 
-  fetchCarburants(): void {
-    this.voitureService.getCarburant().subscribe((data: string[]) => {
-      this.carburants = data; // Mettre à jour le tableau de marques avec les données récupérées de l'API
-      console.log(this.carburants);
-    });
+  updateCarburants(): void {
+    const filteredVoitures = this.selectedMarque === 'Toutes les marques' ? this.voitures_backup : this.voitures_backup.filter(voiture => voiture.marque === this.selectedMarque);
+    const carburantsSet = new Set<string>(filteredVoitures.map(voiture => voiture.carburant));
+    this.carburants = ['Tous les carburants', ...Array.from(carburantsSet)];
   }
 
   applyFilter(): void {
-    // Créer une copie des voitures pour éviter de modifier directement this.voitures
-    let filteredVoitures = [...this.voitures];
-    let filteredVoitures_par_marque = [...this.voitures];
-  
-    // Appliquer le filtre par marque si une marque est sélectionnée
-    if (this.selectedMarque) {
-      if (((this.selectedMarque)=='Toutes les marques')){
-        this.voitureService.getVoitures().subscribe((data) => {
-          this.voitures = data; // Assign data.results to this.voitures
-        });
-        console.log(this.selectedMarque);
-      }
-      else{
-        filteredVoitures = this.voitures_backup.filter(voiture => voiture.marque === this.selectedMarque);
-        filteredVoitures_par_marque = filteredVoitures;}
-    }
-    
-    //filtre carburant
-    if (this.selectedCarburant) {
-      filteredVoitures = filteredVoitures_par_marque.filter(voiture => voiture.carburant === this.selectedCarburant);
-    }
-  
-    // Mettre à jour this.voitures avec les voitures filtrées
-    this.voitures = filteredVoitures;
-  }
-  
+    let filteredVoitures = this.voitures_backup;
 
-  // filterByMarque() {
-  //   if (this.selectedMarque) {
-  //     this.dataSource.data = this.voitures.filter(voiture => voiture.marque === this.selectedMarque);
-  //   } else {
-  //     this.dataSource.data = this.voitures;
-  //   }
-  // }
+    if (this.selectedMarque !== 'Toutes les marques') {
+      filteredVoitures = filteredVoitures.filter(voiture => voiture.marque === this.selectedMarque);
+    }
+
+    if (this.selectedCarburant !== 'Tous les carburants') {
+      filteredVoitures = filteredVoitures.filter(voiture => voiture.carburant === this.selectedCarburant);
+    }
+
+    this.voitures = filteredVoitures;
+    this.updateCarburants();
+  }
 }
