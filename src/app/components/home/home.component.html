@@ -1,3 +1,5 @@
+<app-menu></app-menu>
+
 <mat-tab-group>
     <mat-tab label="Accueil"> <app-accueil></app-accueil></mat-tab>      
     <mat-tab label="Notre catalogue de voitures"> <app-catalogue></app-catalogue> </mat-tab>
@@ -5,3 +7,15 @@
     <mat-tab label="Inscription"> <app-inscription></app-inscription> </mat-tab>
     <mat-tab label="FAQ"> <app-faq></app-faq> </mat-tab>
 </mat-tab-group>
+
+<nav>
+    <ul>
+      <li><a routerLink="/accueil">Accueil</a></li>
+      <li><a routerLink="/catalogue">Notre catalogue de voitures</a></li>
+      <li><a routerLink="/connexion">Connexion</a></li>
+      <li><a routerLink="/inscription">Inscription</a></li>
+      <li><a routerLink="/faq">FAQ</a></li>
+    </ul>
+  </nav>
+
+<router-outlet></router-outlet>

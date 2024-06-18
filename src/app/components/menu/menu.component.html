@@ -1,0 +1,10 @@
+<nav class="navbar">
+    <ul class="navbar-list">
+      <li class="navbar-item"><a routerLink="/accueil" class="navbar-link">Accueil</a></li>
+      <li class="navbar-item"><a routerLink="/catalogue" class="navbar-link">Notre catalogue de voitures</a></li>
+      <li class="navbar-item" *ngIf="!isLoggedIn()"><a routerLink="/connexion" class="navbar-link">Connexion</a></li>
+      <li class="navbar-item" *ngIf="!isLoggedIn()"><a routerLink="/inscription" class="navbar-link">Inscription</a></li>
+      <li class="navbar-item"><a routerLink="/faq" class="navbar-link">FAQ</a></li>
+      <li class="navbar-item" *ngIf="isLoggedIn()"><a (click)="onLogout()" class="navbar-link">Déconnexion</a></li>
+    </ul>
+  </nav>  

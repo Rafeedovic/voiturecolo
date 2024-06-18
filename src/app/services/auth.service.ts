@@ -7,7 +7,7 @@ import firebase from 'firebase/compat/app';
 })
 export class AuthService {
   private currentUser: firebase.User | null = null;
-
+  private loggedIn = false;
   constructor(private afAuth: AngularFireAuth) {
     // Initialisez currentUser en écoutant les changements de l'état d'authentification
     this.afAuth.authState.subscribe(user => {
@@ -52,6 +52,7 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
+      this.loggedIn = true;
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
       this.currentUser = result.user; // Stocke l'utilisateur connecté
       return result.user;
@@ -61,9 +62,14 @@ export class AuthService {
     }
   }
   
-  async logout() {
-    await this.afAuth.signOut();
+  logout() {
+    this.afAuth.signOut();
+    this.loggedIn = false;
     this.currentUser = null; // Réinitialiser l'utilisateur après déconnexion
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
   }
 
   getUser() {

@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CarouselCaptionComponent,CarouselComponent,CarouselControlComponent,CarouselIndicatorsComponent,CarouselInnerComponent,CarouselItemComponent,ThemeDirective} from '@coreui/angular';
 import { RouterLink } from '@angular/router';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CatalogueComponent } from './components/catalogue/catalogue.component';
     AccueilComponent,
     FaqComponent,
     ListevoituresComponent,
-    CatalogueComponent
+    CatalogueComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

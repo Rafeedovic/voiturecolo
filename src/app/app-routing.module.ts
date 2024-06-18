@@ -7,15 +7,18 @@ import { HomeComponent } from './components/home/home.component';
 import { ListevoituresComponent } from './components/listevoitures/listevoitures.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
 
 const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
   { path: 'connexion', component: ConnexionComponent },
-  { path: '', component: HomeComponent },
+  //{ path: '', component: HomeComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'accueil', component: AccueilComponent },
-  { path: 'catalogue', component: ListevoituresComponent },
-  //{ path: '', redirectTo: '/inscription', pathMatch: 'full' }
+  { path: 'menu', component: MenuComponent },
+  { path: 'catalogue', component: CatalogueComponent },
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
 
 @NgModule({
