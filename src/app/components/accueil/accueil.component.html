@@ -22,7 +22,54 @@
 <div class="text-center mt-4">
   <button (click)="displayLastVoiture()" class="btn btn-primary styled-button">Valider votre choix</button>
 </div>
-<p *ngIf="showLastVoiture && lastVoiture">Dernière voiture filtrée : {{ lastVoiture | json }}</p>
+<!-- <p *ngIf="showLastVoiture && lastVoiture">Dernière voiture filtrée : {{ lastVoiture | json }}</p> -->
+
+<div *ngIf="showLastVoiture && lastVoiture">
+  Dernière voiture filtrée :
+  <ul>
+    <li><strong>Marque:</strong> {{ lastVoiture.marque }}</li>
+    <li><strong>Modèle dossier:</strong> {{ lastVoiture.modele_dossier }}</li>
+    <li><strong>Modèle UTAC:</strong> {{ lastVoiture.modele_utac }}</li>
+    <li><strong>Désignation commerciale:</strong> {{ lastVoiture.designation_commerciale }}</li>
+    <li><strong>CNIT:</strong> {{ lastVoiture.cnit }}</li>
+    <li><strong>Type variante version (TVV):</strong> {{ lastVoiture.type_variante_version_tvv }}</li>
+    <li><strong>Carburant:</strong> {{ lastVoiture.carburant }}</li>
+    <li><strong>Hybride:</strong> {{ lastVoiture.hybride }}</li>
+    <li><strong>Puissance administrative:</strong> {{ lastVoiture.puissance_administrative }}</li>
+    <li><strong>Puissance maximale:</strong> {{ lastVoiture.puissance_maximale }}</li>
+    <li><strong>Boîte de vitesse:</strong> {{ lastVoiture.boite_de_vitesse }}</li>
+    <li><strong>Consommation urbaine (L/100km):</strong> {{ lastVoiture.consommation_urbaine_l_100km }}</li>
+    <li><strong>Consommation extra-urbaine (L/100km):</strong> {{ lastVoiture.consommation_extra_urbaine_l_100km }}</li>
+    <li><strong>Consommation mixte (L/100km):</strong> {{ lastVoiture.consommation_mixte_l_100km }}</li>
+    <li><strong>CO2 (g/km):</strong> {{ lastVoiture.co2_g_km }}</li>
+    <li><strong>CO type I (g/km):</strong> {{ lastVoiture.co_type_i_g_km }}</li>
+    <li><strong>HC (g/km):</strong> {{ lastVoiture.hc_g_km }}</li>
+    <li><strong>NOx (g/km):</strong> {{ lastVoiture.nox_g_km }}</li>
+    <li><strong>HC+NOx (g/km):</strong> {{ lastVoiture.hc_nox_g_km }}</li>
+    <li><strong>Particules (g/km):</strong> {{ lastVoiture.particules_g_km }}</li>
+    <li><strong>Masse vide Euro min (kg):</strong> {{ lastVoiture.masse_vide_euro_min_kg }}</li>
+    <li><strong>Masse vide Euro max (kg):</strong> {{ lastVoiture.masse_vide_euro_max_kg }}</li>
+    <li><strong>Champ V9:</strong> {{ lastVoiture.champ_v9 }}</li>
+    <li><strong>Année:</strong> {{ lastVoiture.annee }}</li>
+    <li><strong>Carrosserie:</strong> {{ lastVoiture.carrosserie }}</li>
+    <li><strong>Gamme:</strong> {{ lastVoiture.gamme }}</li>
+  </ul>
+</div>
+
+<div>
+  <label>
+    <input type="radio" [(ngModel)]="choixFiltrage" value="annee"> Année
+  </label>
+  <label>
+    <input type="radio" [(ngModel)]="choixFiltrage" value="puissance_administrative"> Puissance fiscale
+  </label>
+  <label>
+    <input type="radio" [(ngModel)]="choixFiltrage" value="puissance_maximale"> Puissance din
+  </label>
+</div>
+<div>
+  <button (click)="filterVoitures()">Appliquer le filtre</button>
+</div>
 
 <div *ngIf="sameGammeVoitures.length > 0" class="mt-4">
   <h3 class="text-center">Voitures de la même gamme</h3>
@@ -49,3 +96,5 @@
     </li>
   </ul>
 </div>
+
+

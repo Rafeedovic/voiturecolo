@@ -4,5 +4,8 @@ export interface Voiture {
     modele: string;
     carburant: string;
     gamme : string;
+    annee : string;
+    puissance_administrative : string;
+    puissance_maximale : string;
     // Other properties
 }

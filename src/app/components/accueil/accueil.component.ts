@@ -21,6 +21,7 @@ export class AccueilComponent {
   lastVoiture: any;
   showLastVoiture: boolean = false;
   sameGammeVoitures: any[] = [];
+  choixFiltrage: string = "";
 
   ngOnInit(): void {
     if (this.authService.getUser()){
@@ -77,6 +78,50 @@ export class AccueilComponent {
       });
   }
 
+  fetchVoituresByAnnee(gamme: string,annee: string): void {
+    this.voitureService.getVoitures()
+      .subscribe((data) => {
+        this.sameGammeVoitures = data.filter(voiture => (voiture.annee === annee) && (voiture.gamme === gamme));
+      }, (error) => {
+        console.error('Error fetching voitures', error);
+      });
+  }
+
+  fetchVoituresByPuissanceFiscale(gamme: string,puissance_administrative: string): void {
+    this.voitureService.getVoitures()
+      .subscribe((data) => {
+        this.sameGammeVoitures = data.filter(voiture => (voiture.puissance_administrative === puissance_administrative) && (voiture.gamme === gamme));
+      }, (error) => {
+        console.error('Error fetching voitures', error);
+      });
+  }
+
+  fetchVoituresByPuissanceDin(gamme: string,puissance_maximale: string): void {
+    this.voitureService.getVoitures()
+      .subscribe((data) => {
+        this.sameGammeVoitures = data.filter(voiture => (voiture.puissance_maximale === puissance_maximale) && (voiture.gamme === gamme));
+      }, (error) => {
+        console.error('Error fetching voitures', error);
+      });
+  }
+  filterVoitures(): void {
+    this.displayLastVoiture();
+    console.log(this.choixFiltrage);
+    switch (this.choixFiltrage) {
+      case 'annee':
+        this.fetchVoituresByAnnee(this.lastVoiture.gamme,this.lastVoiture.annee);
+        break;
+      case 'puissance_administrative':
+        this.fetchVoituresByPuissanceFiscale(this.lastVoiture.gamme,this.lastVoiture.puissance_administrative);
+        break;
+      case 'puissance_maximale':
+        this.fetchVoituresByPuissanceDin(this.lastVoiture.gamme,this.lastVoiture.puissance_maximale);
+        break;
+      // default:
+      //   this.filteredVoitures = [];
+      //   break;
+    }
+  }
   trierParCO2(): void {
     this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
   }
