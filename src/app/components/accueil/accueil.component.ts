@@ -21,7 +21,7 @@ export class AccueilComponent {
   lastVoiture: any;
   showLastVoiture: boolean = false;
   sameGammeVoitures: any[] = [];
-  choixFiltrage: string = "";
+  choixFiltrage: string = 'annee';
 
   ngOnInit(): void {
     if (this.authService.getUser()){
@@ -64,9 +64,9 @@ export class AccueilComponent {
 
   displayLastVoiture(): void {
     this.showLastVoiture = true;
-    if (this.lastVoiture) {
-      this.fetchVoituresByGamme(this.lastVoiture.gamme);
-    }
+    // if (this.lastVoiture) {
+    //   this.fetchVoituresByGamme(this.lastVoiture.gamme);
+    // }
   }
 
   fetchVoituresByGamme(gamme: string): void {
@@ -82,6 +82,7 @@ export class AccueilComponent {
     this.voitureService.getVoitures()
       .subscribe((data) => {
         this.sameGammeVoitures = data.filter(voiture => (voiture.annee === annee) && (voiture.gamme === gamme));
+        this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
       }, (error) => {
         console.error('Error fetching voitures', error);
       });
@@ -91,6 +92,7 @@ export class AccueilComponent {
     this.voitureService.getVoitures()
       .subscribe((data) => {
         this.sameGammeVoitures = data.filter(voiture => (voiture.puissance_administrative === puissance_administrative) && (voiture.gamme === gamme));
+        this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
       }, (error) => {
         console.error('Error fetching voitures', error);
       });
@@ -100,12 +102,14 @@ export class AccueilComponent {
     this.voitureService.getVoitures()
       .subscribe((data) => {
         this.sameGammeVoitures = data.filter(voiture => (voiture.puissance_maximale === puissance_maximale) && (voiture.gamme === gamme));
+        this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
       }, (error) => {
         console.error('Error fetching voitures', error);
       });
   }
   filterVoitures(): void {
-    this.displayLastVoiture();
+    this.fetchVoituresByGamme(this.lastVoiture.gamme)
+    //this.displayLastVoiture();
     console.log(this.choixFiltrage);
     switch (this.choixFiltrage) {
       case 'annee':
