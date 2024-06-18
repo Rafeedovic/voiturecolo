@@ -76,4 +76,8 @@ export class AccueilComponent {
         console.error('Error fetching voitures', error);
       });
   }
+
+  trierParCO2(): void {
+    this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
+  }
 }

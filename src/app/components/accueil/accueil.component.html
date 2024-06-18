@@ -1,36 +1,34 @@
 <form *ngIf="email" (ngSubmit)="logout()">
-    <button type="submit">Déconnexion</button>
+  <button type="submit">Déconnexion</button>
 </form>
 
 <c-carousel [dark]="true" [wrap]="false">
-    <c-carousel-indicators></c-carousel-indicators>
-    <c-carousel-inner>
-      <c-carousel-item *ngFor="let slide of slides; index as i;">
-        <img
-          [src]="slide.src"
-          alt="{{slide.title}}"
-          class="d-block w-100"
-          loading="lazy"
-        />
-        <c-carousel-caption class="d-none d-md-block">
-          <h3>{{slide.title}}</h3>
-          <p>{{slide.subtitle}}</p>
-        </c-carousel-caption>
-      </c-carousel-item>
-    </c-carousel-inner>
-    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
-    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
-  </c-carousel>
+  <c-carousel-indicators></c-carousel-indicators>
+  <c-carousel-inner>
+    <c-carousel-item *ngFor="let slide of slides; index as i;">
+      <img [src]="slide.src" alt="{{slide.title}}" class="d-block w-100" loading="lazy" />
+      <c-carousel-caption class="d-none d-md-block">
+        <h3>{{slide.title}}</h3>
+        <p>{{slide.subtitle}}</p>
+      </c-carousel-caption>
+    </c-carousel-item>
+  </c-carousel-inner>
+  <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+  <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
 
 <app-listevoitures (lastValueEmitter)="handleLastValue($event)"></app-listevoitures>
 
 <div class="text-center mt-4">
-    <button (click)="displayLastVoiture()" class="btn btn-primary styled-button">Valider votre choix </button>
+  <button (click)="displayLastVoiture()" class="btn btn-primary styled-button">Valider votre choix</button>
 </div>
 <p *ngIf="showLastVoiture && lastVoiture">Dernière voiture filtrée : {{ lastVoiture | json }}</p>
 
 <div *ngIf="sameGammeVoitures.length > 0" class="mt-4">
   <h3 class="text-center">Voitures de la même gamme</h3>
+  <div class="text-center mb-3">
+    <button (click)="trierParCO2()" class="btn btn-primary styled-button">Trier par CO2 (croissant)</button>
+  </div>
   <ul class="list-group">
     <li *ngFor="let voiture of sameGammeVoitures; let i = index" class="list-group-item" [id]="'voiture-' + i">
       <div class="row">
