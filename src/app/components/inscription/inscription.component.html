@@ -1,38 +1,48 @@
 <app-menu></app-menu>
 
-
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registration-form">
-  <p>
-    <label for="nom">Nom</label>
-    <input type="text" id="nom" formControlName="nom">
-    <small *ngIf="registerForm.get('nom')?.touched && registerForm.get('nom')?.invalid">Nom is required</small>
-  </p>
-  <p>
-    <label for="prenom">Prénom</label>
-    <input type="text" id="prenom" formControlName="prenom">
-    <small *ngIf="registerForm.get('prenom')?.touched && registerForm.get('prenom')?.invalid">Prénom is required</small>
-  </p>
-  <p>
-    <label for="email">Email</label>
-    <input type="email" id="email" formControlName="email">
-    <small *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">Email is required and must be a valid email</small>
-  </p>
-  <p>
-    <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password">
-    <small *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">Password is required and must be at least 6 characters</small>
-  </p>
-  <p>
-    <button type="submit" class="btn">Inscription</button>
-  </p>
-  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
-  <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
-  <p *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" class="success-message">Veuillez vérifier votre adresse mail pour valider votre inscription</p>
-</form>
-
-<!-- Afficher les informations de l'utilisateur après l'inscription -->
-<div *ngIf="userInfo" class="user-info">
-  <p>Nom: {{ userInfo.nom }}</p>
-  <p>Prénom: {{ userInfo.prenom }}</p>
-  <p>Email: {{ userInfo.email }}</p>
+<div class="container-fluid full-height">
+  <div class="row justify-content-center align-items-center full-height">
+    <div class="col-md-4">
+      <div class="form-container">
+        <h2 class="text-center">Inscription</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registration-form">
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" formControlName="nom" class="form-control" required>
+            <small *ngIf="registerForm.get('nom')?.touched && registerForm.get('nom')?.invalid">Nom est requis</small>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" formControlName="prenom" class="form-control" required>
+            <small *ngIf="registerForm.get('prenom')?.touched && registerForm.get('prenom')?.invalid">Prénom est requis</small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" required>
+            <small *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">Email est requis et doit être valide</small>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password" class="form-control" required>
+            <small *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">Mot de passe est requis et doit contenir au moins 6 caractères</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Inscription</button>
+          <div *ngIf="errorMessage" class="error-message text-danger mt-3">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="successMessage" class="success-message mt-3">
+            {{ successMessage }}
+          </div>
+          <div *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" class="success-message mt-3">
+            Veuillez vérifier votre adresse mail pour valider votre inscription
+          </div>
+        </form>
+        <div *ngIf="userInfo" class="user-info mt-3">
+          <p>Nom: {{ userInfo.nom }}</p>
+          <p>Prénom: {{ userInfo.prenom }}</p>
+          <p>Email: {{ userInfo.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
