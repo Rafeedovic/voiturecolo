@@ -95,7 +95,7 @@
 
 <div *ngIf="showResult && sameGammeVoitures.length > 0" class="mt-4">
   <div class="container text-center mt-4">
-    <h2 class="text-center">Voitures de la même gamme mais plus écolo : </h2>
+    <h2 class="text-center">Voitures de la même gamme mais plus écolo :</h2>
   </div>
   <ul class="list-group">
     <li *ngFor="let voiture of sameGammeVoitures; let i = index" class="list-group-item" [id]="'voiture-' + i">
@@ -105,6 +105,7 @@
         <div class="col-md-2"><strong>Carburant:</strong> {{ voiture.carburant }}</div>
         <div class="col-md-2"><strong>Hybride:</strong> {{ voiture.hybride }}</div>
         <div class="col-md-2"><strong>Boîte de vitesse:</strong> {{ voiture.boite_de_vitesse }}</div>
+        
       </div>
       <div class="row mt-2">
         <div class="col-md-3"><strong>Année:</strong> {{ voiture.annee }}</div>
@@ -112,6 +113,15 @@
         <div class="col-md-2"><strong>Puissance :</strong> {{ voiture.puissance_maximale }}</div>
         <div class="col-md-2"><strong>Carrosserie:</strong> {{ voiture.carrosserie }}</div>
         <div class="col-md-2"><strong>Conso%100 :</strong> {{ voiture.consommation_mixte_l_100km }}</div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-center" *ngIf="isloggedin()">
+          <button class="btn btn-outline-primary btn-sm"
+                  [class.btn-success]="estDansFavoris(voiture)"
+                  (click)="toggleFavoris(voiture)">
+            {{ estDansFavoris(voiture) ? 'Retirer des favoris' : 'Favoris' }}
+          </button>
+        </div>
       </div>
     </li>
   </ul>

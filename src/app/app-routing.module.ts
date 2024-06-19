@@ -9,6 +9,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
+import { FavorisComponent } from './components/favoris/favoris.component';
 
 const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'catalogue', component: CatalogueComponent },
+  { path: 'favoris', component: FavorisComponent },
   { path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
 

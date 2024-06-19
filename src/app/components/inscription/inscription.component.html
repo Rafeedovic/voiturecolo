@@ -36,12 +36,11 @@
           <div *ngIf="submitted && registerForm.valid && !(errorMessage) && (successMessage=='')" class="success-message mt-3">
             Veuillez vérifier votre adresse mail pour valider votre inscription
           </div>
+          <div class="text-center mt-2">
+            <a>Vous etes déja inscrit ? </a>
+            <a routerLink="/connexion">Se connecter</a>
+          </div>
         </form>
-        <div *ngIf="userInfo" class="user-info mt-3">
-          <p>Nom: {{ userInfo.nom }}</p>
-          <p>Prénom: {{ userInfo.prenom }}</p>
-          <p>Email: {{ userInfo.email }}</p>
-        </div>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; // Importez map depuis 'rxjs/operators'
 import { Voiture } from '../components/listevoitures/voiture';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,9 @@ import { Voiture } from '../components/listevoitures/voiture';
 export class VoitureService {
   private limit_results :string = `100`;
   private apiUrl = 'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/vehicules-commercialises/records?limit='+this.limit_results;
-
-  constructor(private http: HttpClient) {}
+  private localStorageKey = 'favoris'; // Clé pour stocker les favoris dans localStorage  
+  
+  constructor(private http: HttpClient,private authService: AuthService) {}
 
   searchVoitures(query: string): Observable<any> {
     const url = `${this.apiUrl}&q=${query}`;
@@ -73,5 +75,46 @@ export class VoitureService {
         return Array.from(carburantsSet); // Convertir le Set en tableau
       })
     );
+  }
+
+  private getKeyForUser(): string {
+    const userEmail = this.authService.getUser()?.email;
+    return `${this.localStorageKey}_${userEmail}`;
+  }
+
+  public getFavoris(): any[] {
+    const key = this.getKeyForUser();
+    const favorisString = localStorage.getItem(key);
+    return favorisString ? JSON.parse(favorisString) : [];
+  }
+
+  private generateUniqueIdentifier(voiture: any): string {
+    // Utilisation de la paire (marque, modèle commercial) comme identifiant unique
+    return `${voiture.marque}_${voiture.designation_commerciale}`;
+  }
+
+  ajouterAuxFavoris(voiture: Voiture): void {
+    const key = this.getKeyForUser();
+    const favoris = this.getFavoris();
+    const uniqueIdentifier = this.generateUniqueIdentifier(voiture);
+
+    if (!favoris.find(v => this.generateUniqueIdentifier(v) === uniqueIdentifier)) {
+      favoris.push(voiture);
+      localStorage.setItem(key, JSON.stringify(favoris));
+    }
+  }
+
+  estDansFavoris(voiture: any): boolean {
+    const favoris = this.getFavoris();
+    const uniqueIdentifier = this.generateUniqueIdentifier(voiture);
+    return favoris.some(v => this.generateUniqueIdentifier(v) === uniqueIdentifier);
+  }
+
+  supprimerDesFavoris(voiture: any): void {
+    const key = this.getKeyForUser();
+    let favoris = this.getFavoris().filter(v => {
+      return !(v.marque === voiture.marque && v.designation_commerciale === voiture.designation_commerciale);
+    });
+    localStorage.setItem(key, JSON.stringify(favoris));
   }
 }

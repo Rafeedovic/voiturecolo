@@ -33,6 +33,7 @@ import {CarouselCaptionComponent,CarouselComponent,CarouselControlComponent,Caro
 import { RouterLink } from '@angular/router';
 import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { FavorisComponent } from './components/favoris/favoris.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MenuComponent } from './components/menu/menu.component';
     FaqComponent,
     ListevoituresComponent,
     CatalogueComponent,
-    MenuComponent
+    MenuComponent,
+    FavorisComponent
   ],
   imports: [
     BrowserModule,

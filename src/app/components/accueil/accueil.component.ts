@@ -6,7 +6,6 @@ import { VoitureService } from '../../services/voiture.service';
 import { OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
-
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
@@ -137,5 +136,21 @@ export class AccueilComponent {
   }
   trierParCO2(): void {
     this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
+  }
+
+  toggleFavoris(voiture: any): void {
+    if (this.estDansFavoris(voiture)) {
+      this.voitureService.supprimerDesFavoris(voiture);
+    } else {
+      this.voitureService.ajouterAuxFavoris(voiture);
+    }
+  }
+
+  isloggedin(){
+    return this.authService.isLoggedIn();
+  }
+
+  estDansFavoris(voiture: any): boolean {
+    return this.voitureService.estDansFavoris(voiture);
   }
 }

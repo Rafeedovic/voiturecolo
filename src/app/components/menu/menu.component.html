@@ -8,6 +8,7 @@
       <li class="navbar-item" *ngIf="!isLoggedIn()"><a routerLink="/connexion" class="navbar-link">Connexion</a></li>
       <li class="navbar-item" *ngIf="!isLoggedIn()"><a routerLink="/inscription" class="navbar-link">Inscription</a></li>
       <li class="navbar-item"><a routerLink="/faq" class="navbar-link">FAQ</a></li>
+      <li class="navbar-item" *ngIf="isLoggedIn()"><a routerLink="/favoris" class="navbar-link">Favoris</a></li>
       <li class="navbar-item" *ngIf="isLoggedIn()"><a (click)="onLogout()" class="navbar-link">Déconnexion</a></li>
     </ul>
   </nav>  
