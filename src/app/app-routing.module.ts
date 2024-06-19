@@ -16,11 +16,11 @@ const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   //{ path: '', component: HomeComponent },
   { path: 'faq', component: FaqComponent },
-  { path: 'accueil', component: AccueilComponent },
+  { path: '', component: AccueilComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'catalogue', component: CatalogueComponent },
   { path: 'favoris', component: FavorisComponent },
-  { path: '', redirectTo: '/accueil', pathMatch: 'full' }
+  //{ path: '', redirectTo: '/accueil', pathMatch: 'full' }
 ];
 
 @NgModule({
