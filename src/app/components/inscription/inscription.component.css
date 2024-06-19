@@ -1,63 +1,84 @@
-/* Inscription.component.css */
-.register-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    margin: 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 5px;
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    text-align: center;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .user-info {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .user-info h3 {
-    margin-top: 0;
-  }
-  
-  
+/* Global styles for body */
+body {
+  background-color: #f0f0f0; /* Light grey background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Full height for container */
+.full-height {
+  height: 100vh;
+}
+
+/* Form container */
+.form-container {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Form fields */
+.registration-form .form-group {
+  margin: 15px 0;
+}
+
+/* Labels */
+.registration-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input fields */
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button */
+.registration-form .btn {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Button hover effect */
+.registration-form .btn:hover {
+  background-color: #45a049;
+}
+
+/* Error and success messages */
+.registration-form .error-message {
+  color: red;
+}
+
+.registration-form .success-message {
+  color: green;
+}
+
+/* User info display */
+.user-info {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}

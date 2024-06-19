@@ -1,0 +1,15 @@
+<app-menu></app-menu>
+
+<div class="container mt-4">
+    <h2 class="text-center">Liste des favoris</h2>
+    <ul class="list-group">
+      <li *ngFor="let voiture of favoris" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          {{ voiture.marque }} - {{ voiture.designation_commerciale }}
+        </div>
+        <button class="btn btn-danger btn-sm" (click)="supprimerDesFavoris(voiture)">Supprimer</button>
+      </li>
+      <li *ngIf="favoris.length === 0" class="list-group-item text-center">Aucun favori trouvé.</li>
+    </ul>
+  </div>
+  

@@ -1,17 +1,32 @@
-<div>
-  <h2>Connexion</h2>
-  <form (ngSubmit)="onLogin()">
-    <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" [(ngModel)]="email" name="email" required>
+<app-menu></app-menu>
+
+<div class="container-fluid full-height">
+  <div class="row justify-content-center align-items-center full-height">
+    <div class="col-md-4">
+      <div class="form-container">
+        <h2 class="text-center">Connexion</h2>
+        <form (ngSubmit)="onLogin()" class="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+          <div *ngIf="errorMessage" class="error-message text-danger mt-3">
+            {{ errorMessage }}
+          </div>
+          <div *ngIf="connexion" class="success-message mt-3">
+            {{ connexion }}
+          </div>
+          <div class="text-center mt-2">
+            <a>Vous etes nouveau chez nous ? </a>
+            <a routerLink="/inscription">S'inscrire</a>
+          </div>
+        </form>
+      </div>
     </div>
-    <div>
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
-    <button type="submit">Se connecter</button>
-  </form>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
   </div>
 </div>

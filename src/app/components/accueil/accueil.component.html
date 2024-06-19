@@ -1,1 +1,130 @@
-<p>accueil works!</p>
+<app-menu></app-menu>
+
+<c-carousel [dark]="true" [wrap]="false" class="mt-4">
+  <c-carousel-indicators></c-carousel-indicators>
+  <c-carousel-inner>
+    <c-carousel-item *ngFor="let slide of slides; index as i;">
+      <img [src]="slide.src" alt="{{slide.title}}" class="d-block w-100" loading="lazy" />
+      <c-carousel-caption class="d-none d-md-block">
+        <h3>{{slide.title}}</h3>
+        <p>{{slide.subtitle}}</p>
+      </c-carousel-caption>
+    </c-carousel-item>
+  </c-carousel-inner>
+  <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+  <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
+
+<app-listevoitures (lastValueEmitter)="handleLastValue($event)" class="mt-4"></app-listevoitures>
+
+<div class="text-center mt-4">
+  <button (click)="displayLastVoiture()" class="btn btn-primary styled-button">Selectionner votre voiture</button>
+</div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div *ngIf="showResult && showLastVoiture && lastVoiture" class="col-md-8">
+      <p class="text-center">
+        Voici les caractéristiques de votre voiture :
+      </p>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Marque:</strong> {{ lastVoiture.marque }}</li>
+        <li class="list-group-item"><strong>Modèle dossier:</strong> {{ lastVoiture.modele_dossier }}</li>
+        <li class="list-group-item"><strong>Modèle UTAC:</strong> {{ lastVoiture.modele_utac }}</li>
+        <li class="list-group-item"><strong>Désignation commerciale:</strong> {{ lastVoiture.designation_commerciale }}</li>
+        <li class="list-group-item"><strong>CNIT:</strong> {{ lastVoiture.cnit }}</li>
+        <li class="list-group-item"><strong>Type variante version (TVV):</strong> {{ lastVoiture.type_variante_version_tvv }}</li>
+        <li class="list-group-item"><strong>Carburant:</strong> {{ lastVoiture.carburant }}</li>
+        <li class="list-group-item"><strong>Hybride:</strong> {{ lastVoiture.hybride }}</li>
+        <li class="list-group-item"><strong>Puissance administrative:</strong> {{ lastVoiture.puissance_administrative }}</li>
+        <li class="list-group-item"><strong>Puissance maximale:</strong> {{ lastVoiture.puissance_maximale }}</li>
+        <li class="list-group-item"><strong>Boîte de vitesse:</strong> {{ lastVoiture.boite_de_vitesse }}</li>
+        <li class="list-group-item"><strong>Consommation urbaine (L/100km):</strong> {{ lastVoiture.consommation_urbaine_l_100km }}</li>
+        <li class="list-group-item"><strong>Consommation extra-urbaine (L/100km):</strong> {{ lastVoiture.consommation_extra_urbaine_l_100km }}</li>
+        <li class="list-group-item"><strong>Consommation mixte (L/100km):</strong> {{ lastVoiture.consommation_mixte_l_100km }}</li>
+        <li class="list-group-item"><strong>CO2 (g/km):</strong> {{ lastVoiture.co2_g_km }}</li>
+        <li class="list-group-item"><strong>CO type I (g/km):</strong> {{ lastVoiture.co_type_i_g_km }}</li>
+        <li class="list-group-item"><strong>HC (g/km):</strong> {{ lastVoiture.hc_g_km }}</li>
+        <li class="list-group-item"><strong>NOx (g/km):</strong> {{ lastVoiture.nox_g_km }}</li>
+        <li class="list-group-item"><strong>HC+NOx (g/km):</strong> {{ lastVoiture.hc_nox_g_km }}</li>
+        <li class="list-group-item"><strong>Particules (g/km):</strong> {{ lastVoiture.particules_g_km }}</li>
+        <li class="list-group-item"><strong>Masse vide Euro min (kg):</strong> {{ lastVoiture.masse_vide_euro_min_kg }}</li>
+        <li class="list-group-item"><strong>Masse vide Euro max (kg):</strong> {{ lastVoiture.masse_vide_euro_max_kg }}</li>
+        <li class="list-group-item"><strong>Champ V9:</strong> {{ lastVoiture.champ_v9 }}</li>
+        <li class="list-group-item"><strong>Année:</strong> {{ lastVoiture.annee }}</li>
+        <li class="list-group-item"><strong>Carrosserie:</strong> {{ lastVoiture.carrosserie }}</li>
+        <li class="list-group-item"><strong>Gamme:</strong> {{ lastVoiture.gamme }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showResult && showLastVoiture && lastVoiture" class="text-center mt-3">
+  <div class="mb-6">
+    <button (click)="filterVoitures()" class="btn btn-primary">Valider votre choix et découvrir la voiture équivalente</button>
+  </div>
+  <div class="mb-6">
+  <div class="d-flex justify-content-center mt-2">
+    <div class="mr-2">
+      <label>
+        <input type="radio" [(ngModel)]="choixFiltrage" value="annee" checked> Année
+      </label>
+    </div>
+    <div class="mr-2">
+      <label>
+        <input type="radio" [(ngModel)]="choixFiltrage" value="puissance_administrative"> Puissance fiscale
+      </label>
+    </div>
+    <div class="mr-2">
+      <label>
+        <input type="radio" [(ngModel)]="choixFiltrage" value="puissance_maximale"> Puissance din
+      </label>
+    </div>
+    <div class="mr-2">
+      <label>
+        <input type="radio" [(ngModel)]="choixFiltrage" [value]="'meme_gamme'" [disabled]="true" checked> Même gamme
+      </label>
+    </div>
+    <div class="ml-2">
+      <label>
+        <input type="radio" [(ngModel)]="choixFiltrage" [value]="'tri_co2_croissant'" [disabled]="true" checked> Tri CO2 croissant
+      </label>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div *ngIf="showResult && sameGammeVoitures.length > 0" class="mt-4">
+  <div class="container text-center mt-4">
+    <h2 class="text-center">Voitures de la même gamme mais plus écolo :</h2>
+  </div>
+  <ul class="list-group">
+    <li *ngFor="let voiture of sameGammeVoitures; let i = index" class="list-group-item" [id]="'voiture-' + i">
+      <div class="row">
+        <div class="col-md-3"><strong>Marque:</strong> {{ voiture.marque }}</div>
+        <div class="col-md-3"><strong>Désignation commerciale:</strong> {{ voiture.designation_commerciale }}</div>
+        <div class="col-md-2"><strong>Carburant:</strong> {{ voiture.carburant }}</div>
+        <div class="col-md-2"><strong>Hybride:</strong> {{ voiture.hybride }}</div>
+        <div class="col-md-2"><strong>Boîte de vitesse:</strong> {{ voiture.boite_de_vitesse }}</div>
+        
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-3"><strong>Année:</strong> {{ voiture.annee }}</div>
+        <div class="col-md-3"><strong>Co2 g/km:</strong> {{ voiture.co2_g_km }}</div>
+        <div class="col-md-2"><strong>Puissance :</strong> {{ voiture.puissance_maximale }}</div>
+        <div class="col-md-2"><strong>Carrosserie:</strong> {{ voiture.carrosserie }}</div>
+        <div class="col-md-2"><strong>Conso%100 :</strong> {{ voiture.consommation_mixte_l_100km }}</div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-center" *ngIf="isloggedin()">
+          <button class="btn btn-outline-primary btn-sm"
+                  [class.btn-success]="estDansFavoris(voiture)"
+                  (click)="toggleFavoris(voiture)">
+            {{ estDansFavoris(voiture) ? 'Retirer des favoris' : 'Favoris' }}
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

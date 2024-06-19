@@ -7,6 +7,75 @@
 }
 
 .error-message {
-    color: red;
-    margin-top: 10px;
-  }
+  color: red;
+  margin-top: 10px;
+}
+
+/* Global styles for body */
+body {
+  background-color: #f0f0f0; /* Light grey background */
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Full height for container */
+.full-height {
+  height: 100vh;
+}
+
+/* Form container */
+.form-container {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Form fields */
+.form-container .form-group {
+  margin: 15px 0;
+}
+
+/* Labels */
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input fields */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  width: calc(100% - 20px); /* Adjust for padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button */
+.form-container .btn {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Button hover effect */
+.form-container .btn:hover {
+  background-color: #45a049;
+}
+
+/* Error message */
+.form-container .error-message {
+  color: red;
+}

@@ -1,0 +1,96 @@
+/* Global styles for body */
+body {
+font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+background-color: #f0f0f0; /* Light grey background */
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+/* Container for the table */
+.table-container {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+width: 99%;
+margin: 0 auto; /* Center the container */
+padding: 20px;
+background-color: #ffffff; /* White background */
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom table styles */
+.custom-table {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+width: 100%;
+border-collapse: separate;
+border-spacing: 0 10px; /* Add spacing between rows */
+}
+
+/* Header row */
+.custom-table th {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+background-color: #4CAF50; /* Green background for headers */
+color: white;
+font-weight: bold;
+padding: 10px;
+text-align: left;
+}
+
+/* Data rows */
+.custom-table td {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+padding: 10px;
+border-bottom: 1px solid #ddd; /* Add a light border to the bottom of each cell */
+}
+
+/* Form field container */
+.mat-form-field {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+width: 100%;
+margin-bottom: 20px;
+}
+
+/* Mat select styles */
+.mat-select {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+width: 100%;
+}
+
+/* Center table container */
+.table-container {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+max-width: 1200px;
+margin: 20px auto;
+padding: 20px;
+background-color: white;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container {
+  font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Ajustez l'espacement entre les éléments si nécessaire */
+    flex-wrap: wrap; /* Pour permettre aux éléments de se replier sur une nouvelle ligne si l'espace est insuffisant */
+    padding: 20px; /* Ajustez le padding si nécessaire */
+  }
+  
+  mat-form-field {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    flex: 1;
+    min-width: 150px; /* Ajustez la largeur minimale si nécessaire */
+  }
+
