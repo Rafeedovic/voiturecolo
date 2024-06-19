@@ -81,4 +81,5 @@ export class AuthService {
   getUserEmail(): string {
     return this.userEmail;
   }
+
 }

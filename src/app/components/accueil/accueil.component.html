@@ -60,36 +60,38 @@
 </div>
 
 <div *ngIf="showResult && showLastVoiture && lastVoiture" class="text-center mt-3">
-  <div class="mb-3">
+  <div class="mb-6">
     <button (click)="filterVoitures()" class="btn btn-primary">Valider votre choix et découvrir la voiture équivalente</button>
   </div>
-  <div class="d-flex justify-content-center mt-3">
-    <div class="mr-3">
+  <div class="mb-6">
+  <div class="d-flex justify-content-center mt-2">
+    <div class="mr-2">
       <label>
         <input type="radio" [(ngModel)]="choixFiltrage" value="annee" checked> Année
       </label>
     </div>
-    <div class="mr-3">
+    <div class="mr-2">
       <label>
         <input type="radio" [(ngModel)]="choixFiltrage" value="puissance_administrative"> Puissance fiscale
       </label>
     </div>
-    <div class="mr-3">
+    <div class="mr-2">
       <label>
         <input type="radio" [(ngModel)]="choixFiltrage" value="puissance_maximale"> Puissance din
       </label>
     </div>
-    <div>
+    <div class="mr-2">
       <label>
         <input type="radio" [(ngModel)]="choixFiltrage" [value]="'meme_gamme'" [disabled]="true" checked> Même gamme
       </label>
     </div>
-    <div class="ml-3">
+    <div class="ml-2">
       <label>
         <input type="radio" [(ngModel)]="choixFiltrage" [value]="'tri_co2_croissant'" [disabled]="true" checked> Tri CO2 croissant
       </label>
     </div>
   </div>
+</div>
 </div>
 
 

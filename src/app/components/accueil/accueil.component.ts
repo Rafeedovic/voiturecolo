@@ -30,21 +30,21 @@ export class AccueilComponent {
 
     this.slides[0] = {
       id: 0,
-      src: './../../../assets/wp2787426.jpg',
+      src: './../../../assets/nature-suffocated-by-co2-pollution.jpg',
       title: 'Bienvenue à VoiturEcolo !',
-      subtitle: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+      subtitle: "Le confort que vous aimez, l'empreinte écologique que la planète mérite."
     };
     this.slides[1] = {
       id: 1,
-      src: './../../../assets/pngtree-d-rendering-of-energy-station-charging-an-electric-vehicle-ev-image_3704043.jpg',
+      src: './../../../assets/view-3d-car-with-city.jpg',
       title: 'Bienvenue à VoiturEcolo !',
-      subtitle: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+      subtitle: 'Passer au vert sans compromettre le confort.'
     };
     this.slides[2] = {
       id: 2,
-      src: './../../../assets/electric-car-4k-bmw-i-vision-dynamics-wallpaper-preview.jpg',
+      src: './../../../assets/nature-suffocated-by-co2-pollution (1).jpg',
       title: 'Bienvenue à VoiturEcolo !',
-      subtitle: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+      subtitle: 'Conduisez vers un avenir durable, sans sacrifier le confort.'
     };
   }
   
@@ -80,6 +80,7 @@ export class AccueilComponent {
     this.voitureService.getVoitures()
       .subscribe((data) => {
         this.sameGammeVoitures = data.filter(voiture => voiture.gamme === gamme);
+        this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
       }, (error) => {
         console.error('Error fetching voitures', error);
       });
