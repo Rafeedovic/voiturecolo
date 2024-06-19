@@ -50,3 +50,6 @@ body, ul {
     border-radius: 5px;
   }
   
+  .navbar-item:first-child {
+    margin-right: auto; /* Pour pousser le texte à gauche */
+  }

@@ -1,5 +1,8 @@
 <nav class="navbar">
     <ul class="navbar-list">
+        <li class="navbar-item" *ngIf="isLoggedIn()">
+            <a>Salut {{ email }} !</a>
+          </li>
       <li class="navbar-item"><a routerLink="/accueil" class="navbar-link">Accueil</a></li>
       <li class="navbar-item"><a routerLink="/catalogue" class="navbar-link">Notre catalogue de voitures</a></li>
       <li class="navbar-item" *ngIf="!isLoggedIn()"><a routerLink="/connexion" class="navbar-link">Connexion</a></li>
