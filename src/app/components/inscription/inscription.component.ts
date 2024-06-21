@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscription',
@@ -17,7 +18,7 @@ export class InscriptionComponent {
   successMessage: string = '';
   userInfo: { nom: string, prenom: string, email: string } | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService,private router: Router,) {
     this.registerForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -41,7 +42,10 @@ export class InscriptionComponent {
           prenom: prenom
         };
         this.errorMessage = ''; // Réinitialiser le message d'erreur
-        this.successMessage = 'Votre inscription est bien validée '; // Afficher le message de succès
+        this.successMessage = 'Votre inscription est bien validée, redirection ... '; // Afficher le message de succès
+        setTimeout(() => {
+          this.router.navigate(['/connexion']);
+        }, 5000);
       } catch (error) {
         if (error instanceof Error) {
           this.errorMessage = error.message;

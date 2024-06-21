@@ -22,7 +22,7 @@ export class CatalogueComponent implements OnInit {
     this.voitureService.getNombreVoituresParMarque().subscribe(
       (data: { marque: string; nombreVoitures: number }[]) => {
         this.marquesAvecNombreVoitures = data;
-        console.log(this.marquesAvecNombreVoitures);
+        //console.log(this.marquesAvecNombreVoitures);
       },
       (error: any) => {
         console.error('Erreur lors du chargement des marques avec nombre de voitures : ', error);

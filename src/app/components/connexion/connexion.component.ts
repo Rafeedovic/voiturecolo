@@ -36,7 +36,7 @@ export class ConnexionComponent {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/accueil']);
+    this.router.navigate(['']);
   }
 
   isLoggedIn(): boolean {

@@ -1,5 +1,6 @@
-<app-menu></app-menu>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<app-menu></app-menu>
 <c-carousel [dark]="true" [wrap]="false" class="mt-4">
   <c-carousel-indicators></c-carousel-indicators>
   <c-carousel-inner>
@@ -99,8 +100,9 @@
   <div class="container text-center mt-4">
     <h2 class="text-center">Voitures de la même gamme mais plus écolo :</h2>
   </div>
+
   <ul class="list-group">
-    <li *ngFor="let voiture of sameGammeVoitures; let i = index" class="list-group-item" [id]="'voiture-' + i">
+    <li *ngFor="let voiture of sameGammeVoitures; let i = index" class="list-group-item" [id]="'voiture-' + i" [ngStyle]="{'background-color': voiture == lastVoiture ? 'grey' : getBackgroundColor(i, sameGammeVoitures.length)}">
       <div class="row">
         <div class="col-md-3"><strong>Marque:</strong> {{ voiture.marque }}</div>
         <div class="col-md-3"><strong>Désignation commerciale:</strong> {{ voiture.designation_commerciale }}</div>
