@@ -19,6 +19,7 @@ export class AccueilComponent {
 
   slides: any[] = new Array(3).fill({ id: -1, src: '', title: '', subtitle: '' });
   lastVoiture: any;
+  selectedVoiture : any;
   showLastVoiture: boolean = false;
   sameGammeVoitures: any[] = [];
   choixFiltrage: string = 'annee';
@@ -52,15 +53,15 @@ export class AccueilComponent {
 
   async logout(){
     const deconnexion = await this.authService.logout();
-    console.log('deconnexion');
-    this.router.navigate(['accueil']);
+    this.router.navigate(['']);
     this.email = '';
   }
 
   handleLastValue(lastValue: any): void {
     this.showResult= false;
     this.lastVoiture = lastValue;
-    console.log(this.lastVoiture);  
+    console.log(this.lastVoiture);
+    //console.log(this.lastVoiture);  
   }
 
   displayLastVoiture(): void {
@@ -81,6 +82,8 @@ export class AccueilComponent {
       .subscribe((data) => {
         this.sameGammeVoitures = data.filter(voiture => voiture.gamme === gamme);
         this.sameGammeVoitures.sort((a, b) => a.co2_g_km - b.co2_g_km);
+        console.log(this.sameGammeVoitures);
+
       }, (error) => {
         console.error('Error fetching voitures', error);
       });
@@ -119,7 +122,6 @@ export class AccueilComponent {
     
     this.fetchVoituresByGamme(this.lastVoiture.gamme)
     //this.displayLastVoiture();
-    console.log(this.choixFiltrage);
     switch (this.choixFiltrage) {
       case 'annee':
         this.fetchVoituresByAnnee(this.lastVoiture.gamme,this.lastVoiture.annee);
@@ -154,4 +156,12 @@ export class AccueilComponent {
   estDansFavoris(voiture: any): boolean {
     return this.voitureService.estDansFavoris(voiture);
   }
+
+  getBackgroundColor(index: number, total: number): string {
+    const ratio = index / (total - 1);
+    const red = Math.floor(255 * ratio);
+    const green = Math.floor(255 * (1 - ratio));
+    return `rgb(${red},${green},0)`;
+  }
+
 }

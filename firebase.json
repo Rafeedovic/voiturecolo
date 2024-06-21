@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/voiturecolo",
+    "public": "dist/voiturecolo/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
